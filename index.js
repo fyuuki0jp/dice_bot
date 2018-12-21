@@ -58,7 +58,7 @@ async function echoman(ev) {
       text: `ブーケのカウントを終了します。\nブーケの個数は`+buke_count+'でした。'
     })
   }
-  else if(command.match('[1-9]{1,2}D6'))
+  else if(command.match('[0-9]{1,2}D6'))
   {
     var index   = command.indexOf('D');
     var count = command.substring(0,index);
@@ -83,9 +83,9 @@ async function echoman(ev) {
       text: 'result:'+sum+'('+resultA+')'
     })
   }
-  else if(command.match('[1-9]{1,2}D10 c[0-9]'))
+  else if(command.match('[0-9]{1,2}D10 c[0-9]'))
   {
-    var xx = command.match('[1-9]{1,2}D10 c[0-9]');
+    var xx = command.match('[0-9]{1,2}D10 c[0-9]');
     var index   = command.indexOf('D');
     var count = command.substring(0,index);
     var critical = command.slice(-1);
