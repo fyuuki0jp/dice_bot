@@ -58,11 +58,31 @@ async function echoman(ev) {
       text: `ブーケのカウントを終了します。\nブーケの個数は`+buke_count+'でした。'
     })
   }
-  else
+  else if(command.match('[1~9]D[6~100]'))
   {
+    var count = Number(RegExp.$1);
+    var dice = Number(RegExp.$2);
+    var sum = 0;
+    var i = 0;
+    var resultA = '(';
+    var tmp = 0;
+    for(i=0;i<count;i++)
+    {
+      tmp = Math.floor(Math.random() * dice);
+      if(i != 0)
+      {
+        resultA+=',';
+      }
+      resultA += tmp;
+      sum += tmp;
+    }
     return client.replyMessage(ev.replyToken, {
       type: "text",
-      text: `すいませんコマンドの意味が解釈できません。`
+      text: 'result:'+sum+'('+resultA+')'
     })
+  }
+  else
+  {
+    console.log("no adaptive text : "+command);
   }
 }
