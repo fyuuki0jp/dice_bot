@@ -58,7 +58,7 @@ async function echoman(ev) {
 
     return client.replyMessage(ev.replyToken, {
       type: "text",
-      text: `ブーケのカウントを終了します。¥nブーケの個数は`+buke_count+'でした。'
+      text: `ブーケのカウントを終了します。\nブーケの個数は`+buke_count+'でした。'
     })
   }
   else
