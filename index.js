@@ -82,6 +82,45 @@ async function echoman(ev) {
       text: 'result:'+sum+'('+resultA+')'
     })
   }
+  else if(command.match('[1-9]D20 c[0-9]'))
+  {
+    var count = command.slice(0,1);
+    var critical = command.slice(-1);
+    var dice = 10;
+    var isContinue = true;
+    var ncount = 0;
+    var max = 0;
+    var sum = 0;
+    while(isContinue)
+    {
+      max = -1;
+      for(var i = 0;i<count;i++)
+      {
+        var tmp = Math.floor(Math.random() * dice);
+        if(max < tmp)
+        {
+          max = tmp;
+        }
+        if(tmp > critical)
+        {
+          ncount++;
+        }
+      }
+      if(ncount > 0)
+      {
+        sum += 10;
+      }
+      else
+      {
+        sum += max;
+      }
+      count = ncount;
+    }
+    return client.replyMessage(ev.replyToken, {
+      type: "text",
+      text: 'result:'+sum
+    })
+  }
   else
   {
     console.log("no adaptive text : "+command);
