@@ -20,8 +20,8 @@ express()
   .get("/", (req, res) => res.render("pages/index"))
   .get("/g/", (req, res) => res.json({ method: "こんにちは、getさん" }))
   .post("/p/", (req, res) => res.json({ method: "こんにちは、postさん" }))
-  .post("/SK/", line.middleware(Knights), (req, res) => StellarKnights(req, res))
-  .post("/DX/",line.middleware(DX),(req,res) => DoubleCross(req,res))
+  .post("/hook/SK/", line.middleware(Knights), (req, res) => StellarKnights(req, res))
+  .post("/hook/DX/",line.middleware(DX),(req,res) => DoubleCross(req,res))
   .listen(PORT, () => console.log(`Listening on ${PORT}`));
 
 
