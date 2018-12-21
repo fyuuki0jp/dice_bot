@@ -61,7 +61,7 @@ async function echoman(ev) {
   else if(command.match('[1~9]D'))
   {
     var count = command.slice(0,1);
-    var dice = command.slice(3);
+    var dice = command.slice(2);
     var sum = 0;
     var i = 0;
     var resultA = '';
