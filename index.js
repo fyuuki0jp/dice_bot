@@ -30,12 +30,42 @@ function lineBot(req, res) {
   }
   console.log("all event complete");
 }
-
+var buke_count = 0;
 // 追加
 async function echoman(ev) {
   const pro =  await client.getProfile(ev.source.userId);
-  return client.replyMessage(ev.replyToken, {
-    type: "text",
-    text: `${pro.displayName}さん、今「${ev.message.text}」って言いました？`
-  })
+
+  var command = ev.message.text;
+
+  if(command.match('開始') || command.match('スタート'))
+  {
+    buke_count = 0;
+    return client.replyMessage(ev.replyToken, {
+      type: "text",
+      text: `ブーケのカウントを開始します。`
+    })
+  }
+  else if(command.match('ブーケ'))
+  {
+    buke_count += 1;
+    return client.replyMessage(ev.replyToken, {
+      type: "text",
+      text: `ブーケが送られました`
+    })
+  }
+  else if(command.match('ストップ') || command.match('終了'))
+  {
+
+    return client.replyMessage(ev.replyToken, {
+      type: "text",
+      text: `ブーケのカウントを終了します。¥nブーケの個数は`+buke_count+'でした。'
+    })
+  }
+  else
+  {
+    return client.replyMessage(ev.replyToken, {
+      type: "text",
+      text: `すいませんコマンドの意味が解釈できません。`
+    })
+  }
 }
