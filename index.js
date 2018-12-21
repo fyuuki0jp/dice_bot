@@ -64,7 +64,7 @@ async function echoman(ev) {
     var dice = Number(RegExp.$2);
     var sum = 0;
     var i = 0;
-    var resultA = '(';
+    var resultA = '';
     var tmp = 0;
     for(i=0;i<count;i++)
     {
@@ -73,7 +73,7 @@ async function echoman(ev) {
       {
         resultA+=',';
       }
-      resultA += tmp;
+      resultA += tmp.toString();
       sum += tmp;
     }
     return client.replyMessage(ev.replyToken, {
