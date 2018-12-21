@@ -58,9 +58,10 @@ async function echoman(ev) {
       text: `ブーケのカウントを終了します。\nブーケの個数は`+buke_count+'でした。'
     })
   }
-  else if(command.match('[1-9]D6'))
+  else if(command.match('[1-9]{1,2}D6'))
   {
-    var count = command.slice(0,1);
+    var index   = command.indexOf('D');
+    var count = command.substring(0,index);
     var dice = 6;
     var sum = 0;
     var i = 0;
