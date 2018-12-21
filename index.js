@@ -58,15 +58,14 @@ async function echoman(ev) {
       text: `ブーケのカウントを終了します。\nブーケの個数は`+buke_count+'でした。'
     })
   }
-  else if(command.match('[1~9]D[6~100]'))
+  else if(command.match('[1~9]D'))
   {
-    var count = Number(RegExp.$1);
-    var dice = Number(RegExp.$2);
+    var count = command.slice(0,1);
+    var dice = command.slice(3);
     var sum = 0;
     var i = 0;
     var resultA = '';
     var tmp = 0;
-    console.log(count);
     for(i=0;i<count;i++)
     {
       tmp = Math.floor(Math.random() * dice);
