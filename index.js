@@ -68,7 +68,7 @@ async function echoman(ev) {
     var tmp = 0;
     for(i=0;i<count;i++)
     {
-      tmp = Math.floor(Math.random() * dice);
+      tmp = Math.floor(Math.random() * dice)+1;
       if(i != 0)
       {
         resultA+=',';
