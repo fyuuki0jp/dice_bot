@@ -23,14 +23,12 @@ function lineBot(req, res) {
   // ここから追加
   const events = req.body.events;
   const promises = [];
+  console.log("event fire");
   for (let i = 0, l = events.length; i < l; i++) {
     const ev = events[i];
-    promises.push(
-      echoman(ev)
-    );
+    echoman(ev)
   }
-  console.log("event fire");
-  Promise.all(promises).then(console.log("all event complete"));
+  console.log("all event complete");
 }
 
 // 追加
