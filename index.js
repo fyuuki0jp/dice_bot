@@ -29,7 +29,8 @@ function lineBot(req, res) {
       echoman(ev)
     );
   }
-  Promise.all(promises).then(console.log("pass"));
+  console.log("event fire");
+  Promise.all(promises).then(console.log("all event complete"));
 }
 
 // 追加
