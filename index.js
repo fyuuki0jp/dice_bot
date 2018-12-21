@@ -119,6 +119,7 @@ async function echoman(ev) {
         isContinue = false;
       }
       count = ncount;
+      ncount = 0;
     }
     return client.replyMessage(ev.replyToken, {
       type: "text",
