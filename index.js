@@ -66,6 +66,7 @@ async function echoman(ev) {
     var i = 0;
     var resultA = '';
     var tmp = 0;
+    console.log(count);
     for(i=0;i<count;i++)
     {
       tmp = Math.floor(Math.random() * dice);
