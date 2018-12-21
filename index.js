@@ -48,10 +48,7 @@ async function echoman(ev) {
   else if(command.match('ブーケ'))
   {
     buke_count += 1;
-    return client.replyMessage(ev.replyToken, {
-      type: "text",
-      text: `ブーケが送られました`
-    })
+    return
   }
   else if(command.match('ストップ') || command.match('終了'))
   {
