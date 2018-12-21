@@ -91,6 +91,7 @@ async function echoman(ev) {
     var ncount = 0;
     var max = 0;
     var sum = 0;
+    console.log('command : '+command+' count : '+count + ' c : '+critical);
     while(isContinue)
     {
       max = -1;
