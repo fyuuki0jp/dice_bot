@@ -110,10 +110,13 @@ async function echoman(ev) {
       if(ncount > 0)
       {
         sum += 10;
+        console.log("next stage");
       }
       else
       {
         sum += max;
+        console.log("end stage");
+        isContinue = false;
       }
       count = ncount;
     }
