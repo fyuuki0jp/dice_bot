@@ -82,7 +82,7 @@ async function echoman(ev) {
       text: 'result:'+sum+'('+resultA+')'
     })
   }
-  else if(command.match('[1-9]D10 c[0-9]'))
+  else if(command.match('[1-9]{,2}D10 c[0-9]'))
   {
     var count = command.slice(0,1);
     var critical = command.slice(-1);
