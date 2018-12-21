@@ -85,8 +85,8 @@ async function echoman(ev) {
   else if(command.match('[1-9]{1,2}D10 c[0-9]'))
   {
     var xx = command.match('[1-9]{1,2}D10 c[0-9]');
-    var count = xx[0];
-    var critical = xx[1];
+    var count = RegExp.$1;
+    var critical = RegExp.$2;
     var dice = 10;
     var isContinue = true;
     var ncount = 0;
