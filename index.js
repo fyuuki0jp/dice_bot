@@ -21,7 +21,6 @@ express()
 function lineBot(req,res)
 {
   res.status(200).end(); 
-  console.log("pass"); // 追加
   const events = req.body.events;
   const promises = [];
   for (let i = 0, l = events.length; i < l; i++) {
