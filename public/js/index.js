@@ -53,7 +53,7 @@ class App extends React.Component {
                 iconClassNameRight: "muidocs-icon-navigation-expand-more", 
                 onLeftIconButtonClick: this.OpenMenu}
             ), 
-            React.createElement(Menu, null, 
+            React.createElement(Drawer, {open: this.state.open, width: "30%", docked: true}, 
                 React.createElement(MenuItem, {onClick: this.Home}, "ホーム"), 
                 React.createElement(MenuItem, {onClick: this.Dice}, "ダイスロール"), 
                 React.createElement(MenuItem, {onClick: this.Version}, "バージョン")

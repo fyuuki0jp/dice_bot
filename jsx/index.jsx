@@ -52,11 +52,11 @@ class App extends React.Component {
                 iconClassNameRight="muidocs-icon-navigation-expand-more"
                 onLeftIconButtonClick={this.OpenMenu}
             />
-            <Menu>
+            <Drawer open={this.state.open} width="30%" docked={true}>
                 <MenuItem onClick={this.Home}>ホーム</MenuItem>
                 <MenuItem onClick={this.Dice}>ダイスロール</MenuItem>
                 <MenuItem onClick={this.Version}>バージョン</MenuItem>
-            </Menu>
+            </Drawer>
             {main}
             </MuiThemeProvider>
         )
