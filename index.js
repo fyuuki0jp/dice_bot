@@ -2,8 +2,6 @@ const express = require("express");
 const path = require("path");
 const PORT = process.env.PORT || 5000;
 const line = require("@line/bot-sdk");
-const server = require('http').Server(express);
-const io = require('socket.io')(server);
 
 const config = {
   channelAccessToken: process.env.ACCESS_TOKEN,
@@ -11,7 +9,7 @@ const config = {
 };
 const client = new line.Client(config); // 追加
 
-express()
+var server = express()
   .use(express.static(path.join(__dirname, "public")))
   .set("views", path.join(__dirname, "views"))
   .set("view engine", "ejs")
@@ -20,6 +18,9 @@ express()
   .post("/p/", (req, res) => res.json({ method: "こんにちは、postさん" }))
   .post("/hook/", line.middleware(config), (req, res) => StellarKnights(req, res))
   .listen(PORT, () => console.log(`Listening on ${PORT}`));
+
+const io = require('socket.io')(server);
+
 
 function StellarKnights(req, res) {
   res.status(200).end();
