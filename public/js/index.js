@@ -26,6 +26,10 @@ class App extends React.Component {
             open:false,
             mode:0
         };
+        this.OpenMenu = this.OpenMenu.bind(this);
+        this.Home = this.Home.bind(this);
+        this.Dice = this.Dice.bind(this);
+        this.Version = this.Version.bind(this);
     }
     OpenMenu()
     {
