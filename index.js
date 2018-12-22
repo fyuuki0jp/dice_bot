@@ -94,6 +94,13 @@ async function echoman(ev) {
     var ncount = 0;
     var max = 0;
     var sum = 0;
+    if(critical < 2)
+    {
+      return client.replyMessage(ev.replyToken, {
+        type: "text",
+        text: "クリティカル値が2より下となっています。"
+      })
+    }
     console.log('command : '+command+' count : '+count + ' c : '+critical);
     while(isContinue)
     {
@@ -105,7 +112,7 @@ async function echoman(ev) {
         {
           max = tmp;
         }
-        if(tmp > critical)
+        if(tmp >= critical)
         {
           ncount++;
         }
