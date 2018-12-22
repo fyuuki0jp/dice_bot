@@ -11,10 +11,6 @@ const config = {
 };
 const client = new line.Client(config); // 追加
 
-server.listen(process.env.PORT || 3000, function(){
-  console.log("listen socket.io server");
-});
-
 express()
   .use(express.static(path.join(__dirname, "public")))
   .set("views", path.join(__dirname, "views"))
