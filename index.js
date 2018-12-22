@@ -136,6 +136,16 @@ async function echoman(ev) {
       text: 'result:'+sum
     })
   }
+  else if(command.match('D100'))
+  {
+    var dice = 10;
+    var first = Math.floor(Math.random() * dice);
+    var second = Math.floor(Math.random() * dice);
+    return client.replyMessage(ev.replyToken, {
+      type: "text",
+      text: 'result:'+first.toString()+second.toString()
+    })
+  }
   else
   {
     console.log("no adaptive text : "+command);
