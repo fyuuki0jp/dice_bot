@@ -165,15 +165,15 @@ async function echoman(ev) {
       text: 'result:'+first.toString()+second.toString()
     })
   }
-  else if(command.match('[0-9]{1,2}D10'))
+  else if(command.match('[0-9]{1,2}D4'))
   {
     var index   = command.indexOf('D');
     var count = command.substring(0,index);
-    var dice = 10;
+    var dice = 4;
     var result = '';
     var sum = 0;
     for(var i = 0;i<count;i++){
-      var first = Math.floor(Math.random() * dice);
+      var first = Math.floor(Math.random() * dice)+1;
       if(i != 0)
       {
         result += ',';
@@ -186,6 +186,70 @@ async function echoman(ev) {
       text: 'result:'+sum+'('+result+')'
     })
   }
+  else if(command.match('[0-9]{1,2}D12'))
+  {
+    var index   = command.indexOf('D');
+    var count = command.substring(0,index);
+    var dice = 12;
+    var result = '';
+    var sum = 0;
+    for(var i = 0;i<count;i++){
+      var first = Math.floor(Math.random() * dice)+1;
+      if(i != 0)
+      {
+        result += ',';
+      }
+      result += first.toString();
+      sum += first;
+    }
+    return client.replyMessage(ev.replyToken, {
+      type: "text",
+      text: 'result:'+sum+'('+result+')'
+    })
+  }
+  else if(command.match('[0-9]{1,2}D8'))
+  {
+    var index   = command.indexOf('D');
+    var count = command.substring(0,index);
+    var dice = 8;
+    var result = '';
+    var sum = 0;
+    for(var i = 0;i<count;i++){
+      var first = Math.floor(Math.random() * dice)+1;
+      if(i != 0)
+      {
+        result += ',';
+      }
+      result += first.toString();
+      sum += first;
+    }
+    return client.replyMessage(ev.replyToken, {
+      type: "text",
+      text: 'result:'+sum+'('+result+')'
+    })
+  }
+  else if(command.match('[0-9]{1,2}D20'))
+  {
+    var index   = command.indexOf('D');
+    var count = command.substring(0,index);
+    var dice = 20;
+    var result = '';
+    var sum = 0;
+    for(var i = 0;i<count;i++){
+      var first = Math.floor(Math.random() * dice)+1;
+      if(i != 0)
+      {
+        result += ',';
+      }
+      result += first.toString();
+      sum += first;
+    }
+    return client.replyMessage(ev.replyToken, {
+      type: "text",
+      text: 'result:'+sum+'('+result+')'
+    })
+  }
+
   else
   {
     console.log("no adaptive text : "+command);
