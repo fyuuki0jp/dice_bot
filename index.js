@@ -2,7 +2,7 @@ const express = require("express");
 const path = require("path");
 const PORT = process.env.PORT || 5000;
 const line = require("@line/bot-sdk");
-const server = require('https').Server(express);
+const server = require('http').Server(express);
 const io = require('socket.io')(server);
 
 const config = {
