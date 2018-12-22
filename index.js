@@ -2,13 +2,18 @@ const express = require("express");
 const path = require("path");
 const PORT = process.env.PORT || 5000;
 const line = require("@line/bot-sdk");
-const socketio = require('socket.io');
+const server = require('https').Server(express);
+const io = require('socket.io')(server);
 
 const config = {
   channelAccessToken: process.env.ACCESS_TOKEN,
   channelSecret: process.env.SECRET_KEY
 };
 const client = new line.Client(config); // 追加
+
+server.listen(process.env.PORT || 3000, function(){
+  console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
+});
 
 express()
   .use(express.static(path.join(__dirname, "public")))
@@ -251,9 +256,19 @@ async function echoman(ev) {
       text: 'result:'+sum+'('+result+')'
     })
   }
-
+  else if(command.match('URL') || command.match('url') || command.match('ホーム'))
+  {
+    server.address()
+  }
   else
   {
     console.log("no adaptive text : "+command);
   }
 }
+
+
+io.on("connection",(sock) => {
+  sock.on("dice",(res)=>{
+    io.emit("dice","1");
+  });
+})
