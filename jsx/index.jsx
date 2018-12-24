@@ -9,7 +9,7 @@ class App extends React.Component {
             talk:["サンプル：ここにトーク履歴が記入されていきます。"],
         }
     }
-    componentWillMount()
+    componentDidMount()
     {
         var t = this.state.talk;
         socket.on("talk",(res)=>{
