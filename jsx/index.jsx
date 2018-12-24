@@ -25,6 +25,9 @@ class App extends React.Component {
             color:"#000000",
             
         }
+        var style = {
+            "text-align":"center"
+        }
         var talkStyle ={
             position:"absolute",
             top:"15%",
@@ -43,7 +46,7 @@ class App extends React.Component {
         return (
             <div>
                 <header id="title" style={titileStyle}>
-                    <h1 style="text-align: center;"> TRPG　GM管理画面</h1>
+                    <h1 style={style}> TRPG　GM管理画面</h1>
                 </header>
                 <div id="talk" style = {talkStyle}>
                     {talk}

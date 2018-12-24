@@ -26,6 +26,9 @@ class App extends React.Component {
             color:"#000000",
             
         }
+        var style = {
+            "text-align":"center"
+        }
         var talkStyle ={
             position:"absolute",
             top:"15%",
@@ -44,7 +47,7 @@ class App extends React.Component {
         return (
             React.createElement("div", null, 
                 React.createElement("header", {id: "title", style: titileStyle}, 
-                    React.createElement("h1", {style: "text-align: center;"}, " TRPG　GM管理画面")
+                    React.createElement("h1", {style: style}, " TRPG　GM管理画面")
                 ), 
                 React.createElement("div", {id: "talk", style: talkStyle}, 
                     talk
