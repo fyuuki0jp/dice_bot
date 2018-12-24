@@ -2,7 +2,9 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 var DropZone = require('react-dropzone');
 const { getMuiTheme, MuiThemeProvider } = require('material-ui/styles');
-const { RaisedButton, AppBar, Drawer,Menu,Checkbox, MenuItem,Toggle, Divider,FlatButton, TextField, SelectField,Slider,LinearProgress, Paper, DropDownMenu, Table, TableHeader, TableBody, TableRow, TableHeaderColumn, TableRowColumn, Stepper, Step, StepLabel,Dialog } = require('material-ui');
+var AppBar = require('material-ui/AppBar');
+var Drawer = require('material-ui/Drawer');
+var MenuItem = require('material-ui/MenuItem');
 var socket = io.connect();
 
 class Home extends React.Component
