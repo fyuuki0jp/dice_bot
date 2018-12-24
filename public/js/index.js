@@ -3,7 +3,7 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 var DropZone = require('react-dropzone');
 var MuiThemeProvider = require('material-ui/styles/MuiThemeProvider');
-var getMuiTheme = require('material-ui/styles/getMuiTheme');
+const getMuiTheme = require('material-ui/styles/baseThemes/lightBaseTheme');
 var AppBar = require('material-ui/AppBar');
 var Drawer = require('material-ui/Drawer');
 var MenuItem = require('material-ui/MenuItem');
@@ -120,7 +120,7 @@ class App extends React.Component {
 
 
         return (
-            React.createElement(MuiThemeProvider, {muiTheme: getMuiTheme()}, 
+            React.createElement(MuiThemeProvider, {muiTheme: getMuiTheme}, 
             React.createElement(AppBar, {
                 title: "TRPGシステム(大工大TRPGサークル)", 
                 iconClassNameRight: "muidocs-icon-navigation-expand-more", 
@@ -139,7 +139,7 @@ class App extends React.Component {
 
 ReactDOM.render(React.createElement(App, null), document.getElementById('app'));
 
-},{"material-ui/AppBar":152,"material-ui/Drawer":154,"material-ui/MenuItem":165,"material-ui/styles/MuiThemeProvider":185,"material-ui/styles/getMuiTheme":188,"react":225,"react-dom":217,"react-dropzone":218}],2:[function(require,module,exports){
+},{"material-ui/AppBar":152,"material-ui/Drawer":154,"material-ui/MenuItem":165,"material-ui/styles/MuiThemeProvider":185,"material-ui/styles/baseThemes/lightBaseTheme":186,"react":225,"react-dom":217,"react-dropzone":218}],2:[function(require,module,exports){
 function _assertThisInitialized(self) {
   if (self === void 0) {
     throw new ReferenceError("this hasn't been initialised - super() hasn't been called");

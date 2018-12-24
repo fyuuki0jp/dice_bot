@@ -2,7 +2,7 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 var DropZone = require('react-dropzone');
 var MuiThemeProvider = require('material-ui/styles/MuiThemeProvider');
-var getMuiTheme = require('material-ui/styles/getMuiTheme');
+const getMuiTheme = require('material-ui/styles/baseThemes/lightBaseTheme');
 var AppBar = require('material-ui/AppBar');
 var Drawer = require('material-ui/Drawer');
 var MenuItem = require('material-ui/MenuItem');
@@ -119,7 +119,7 @@ class App extends React.Component {
 
 
         return (
-            <MuiThemeProvider muiTheme={getMuiTheme()}>
+            <MuiThemeProvider muiTheme={getMuiTheme}>
             <AppBar
                 title={"TRPGシステム(大工大TRPGサークル)"}
                 iconClassNameRight="muidocs-icon-navigation-expand-more"
