@@ -21,8 +21,9 @@ class App extends React.Component {
             position:"absolute",
             width:"100%",
             height:"15%",
-            background:"#ee00ee",
-            color:"#000000"
+            background:"#01A9DB",
+            color:"#000000",
+            
         }
         var talkStyle ={
             top:"20%",
