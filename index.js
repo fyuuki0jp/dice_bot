@@ -255,7 +255,7 @@ io.on("connection", (sock) => {
   });
   sock.on("image", (res) => {
     var writeFile = res.file;
-    var writePath = './public/img/'+res.name;//Σ(ﾟдﾟ) ｴｯ!? 
+    var writePath = './public/img/map.jpg';//Σ(ﾟдﾟ) ｴｯ!? 
 
     var writeStream = fs.createWriteStream(writePath);
 
