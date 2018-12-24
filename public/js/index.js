@@ -18,6 +18,14 @@ class App extends React.Component {
             this.setState({talk:this.state.talk.concat([res])});
         })
     }
+    onChange(e)
+    {
+        var reader = new FileReader();
+        reader.onload = function(){
+            this.setState({imgURL:this.result});
+        }
+        reader.readAsDataURL(e.target.files[0]);
+    }
     render() {
         var {talk,imgURL} = this.state;
         var titileStyle = {
@@ -58,7 +66,7 @@ class App extends React.Component {
                     )
                 ), 
                 React.createElement("div", {id: "map", style: mapStyle, draggable: true}, 
-                React.createElement("input", {type: "file", id: "files", name: "files[]", multiple: true}), 
+                React.createElement("input", {type: "file", onChange: this.onChange}), 
                 React.createElement("img", {src: imgURL})
                 )
             )
