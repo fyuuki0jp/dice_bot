@@ -21,19 +21,21 @@ class App extends React.Component {
             position:"absolute",
             width:"100%",
             height:"20%",
-            background:"#eeeeee",
-            color:"#FFFFFF"
+            background:"#00eeee",
+            color:"#000000"
         }
         var talkStyle ={
-            width:"30%",
             top:"20%",
             left:"70%",
+            width:"30%",
+            height:"80%",
             position:"absolute",
             background:"#f2f2f3",
             color:"#000000"
         }
         var mapStyle ={
             position:"absolute",
+            top:"20%",
             width:"65%",
             height:"80%"
         }
