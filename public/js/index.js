@@ -24,7 +24,7 @@ class App extends React.Component {
         var reader = new FileReader();
         reader.onload = function(){
             this.setState({imgURL:this.result});
-        }
+        }.bind(this);
         reader.readAsDataURL(e.target.files[0]);
     }
     render() {
