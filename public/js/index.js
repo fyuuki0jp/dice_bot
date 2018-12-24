@@ -10,6 +10,7 @@ class App extends React.Component {
             talk:["サンプル：ここにトーク履歴が記入されていきます。"],
             imgURL:"",
         }
+        this.onChange = this.onChange.bind(this);
     }
     componentDidMount()
     {
