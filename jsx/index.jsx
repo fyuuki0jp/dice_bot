@@ -51,9 +51,9 @@ class App extends React.Component {
                 </header>
                 <div id="talk" style = {talkStyle}>
                     トーク履歴<br/>
-                    <ol>
-                        {talk.map((res)=>{return (res+'\n')})}
-                    </ol>
+                    <ul style={{"list-style-type": "none"}}>
+                        {talk.map((res)=>{return (<li>{res}</li>)})}
+                    </ul>
                 </div>
                 <div id="map" style = {mapStyle}>
 
