@@ -2,53 +2,46 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 var DropZone = require('react-dropzone');
-const {getMuiTheme,MuiThemeProvider} = require('material-ui/styles');
-var {AppBar,Drawer,MenuItem} = require('material-ui');
+const { getMuiTheme, MuiThemeProvider } = require('material-ui/styles');
+var { AppBar, Drawer, MenuItem } = require('material-ui');
 var socket = io.connect();
 
-class Home extends React.Component
-{
-    constructor(props)
-    {
+class Home extends React.Component {
+    constructor(props) {
         super(props);
     }
-    render()
-    {
-        return(
-                React.createElement("h1", null, "Hello World!")
+    render() {
+        return (
+            React.createElement("h1", null, "Hello World!")
         )
     }
 }
 
-class Keaper extends React.Component
-{
-    constructor(props)
-    {
+class Keaper extends React.Component {
+    constructor(props) {
         super(props);
         this.sendfile = this.sendfile.bind(this);
     }
-    sendfile(file)
-    {
+    sendfile(file) {
         var reader = new FileReader();
         var send_file = file;
         reader.onload = (event) => {
             data.file = event.target.result;
             data.name = send_file;
             data.type = "image/jpg";
-   
-            socket.emit('image',data);
+
+            socket.emit('image', data);
         }
         reader.readAsBinaryString(send_file);
     }
-    render()
-    {
+    render() {
         var left = {
-            width:"70%"
+            width: "70%"
         };
         var right = {
-            left:"75%",
-            width:"25%",
-            background:"#f2f2f3"
+            left: "75%",
+            width: "25%",
+            background: "#f2f2f3"
         };
         return (
             React.createElement("div", null, 
@@ -65,17 +58,14 @@ class Keaper extends React.Component
     }
 }
 
-class Version extends React.Component
-{
-    constructor(props)
-    {
+class Version extends React.Component {
+    constructor(props) {
         super(props);
     }
-    render()
-    {
+    render() {
         return (
             React.createElement("h1", null, "バージョン情報")
-            
+
         )
     }
 }
@@ -84,8 +74,8 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            open:false,
-            mode:0
+            open: false,
+            mode: 0
         };
         this.OpenMenu = this.OpenMenu.bind(this);
         this.HideMenu = this.HideMenu.bind(this);
@@ -94,49 +84,47 @@ class App extends React.Component {
         this.Version = this.Version.bind(this);
 
     }
-    OpenMenu()
-    {
-        this.setState({open:true});
+    OpenMenu() {
+        this.setState({ open: true });
     }
-    HideMenu()
-    {
-        this.setState({open:false});
+    HideMenu() {
+        this.setState({ open: false });
     }
-    Home()
-    {
-        this.setState({open:false,mode:0});
+    Home() {
+        this.setState({ open: false, mode: 0 });
     }
-    Keaper()
-    {
-        this.setState({open:false,mode:1});
+    Keaper() {
+        this.setState({ open: false, mode: 1 });
     }
-    Version()
-    {
-        this.setState({open:false,mode:2});
+    Version() {
+        this.setState({ open: false, mode: 2 });
     }
-    render()
-    {
-        
+    render() {
+
         var main = React.createElement(Home, null)
-        if(this.state.mode == 1)
-        {
+        if (this.state.mode == 1) {
             main = React.createElement(Keaper, null)
         }
 
         return (
             React.createElement(MuiThemeProvider, {muiTheme: getMuiTheme()}, 
-            React.createElement(AppBar, {
-                title: "TRPGシステム(大工大TRPGサークル)", 
-                iconClassNameRight: "muidocs-icon-navigation-expand-more", 
-                onLeftIconButtonClick: this.OpenMenu}
-            ), 
-            React.createElement(Drawer, {open: this.state.open, width: "30%", docked: true}, 
-                React.createElement(MenuItem, {onClick: this.Home}, "ホーム"), 
-                React.createElement(MenuItem, {onClick: this.Keaper}, "GM管理画面")
-            ), 
-            React.createElement("div", {id: "main", onClick: this.HideMenu}, 
-                main
-            )
+                React.createElement("div", {id: "page"}, 
+                    React.createElement("div", {id: "menu"}, 
+                        React.createElement(AppBar, {
+                            title: "TRPGシステム(大工大TRPGサークル)", 
+                            iconClassNameRight: "muidocs-icon-navigation-expand-more", 
+                            onLeftIconButtonClick: this.OpenMenu}
+                        ), 
+                        React.createElement(Drawer, {open: this.state.open, width: "30%", docked: true}, 
+                            React.createElement(MenuItem, {onClick: this.Home}, "ホーム"), 
+                            React.createElement(MenuItem, {onClick: this.Keaper}, "GM管理画面")
+                        )
+                    ), 
+                    React.createElement("div", {id: "main", onClick: this.HideMenu}, 
+                        main
+                    )
+                )
+
             )
         )
     }
