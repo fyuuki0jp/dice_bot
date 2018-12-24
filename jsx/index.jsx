@@ -1,7 +1,8 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 var DropZone = require('react-dropzone');
-const { getMuiTheme, MuiThemeProvider } = require('material-ui/styles');
+var MuiThemeProvider = require('material-ui/styles/MuiThemeProvider');
+var getMuiTheme = require('material-ui/styles/getMuiTheme');
 var AppBar = require('material-ui/AppBar');
 var Drawer = require('material-ui/Drawer');
 var MenuItem = require('material-ui/MenuItem');
@@ -125,9 +126,9 @@ class App extends React.Component {
                 onLeftIconButtonClick={this.OpenMenu}
             />
             <Drawer open={this.state.open} width="30%" docked={true}>
-                <MenuItem onClick={this.Home} primaryText="ホーム"/>
-                <MenuItem onClick={this.Keaper} primaryText="キーパー管理画面"/>
-                <MenuItem onClick={this.Version}primaryText="バージョン"/>
+                <MenuItem onClick={this.Home} primaryText={"ホーム"}/>
+                <MenuItem onClick={this.Keaper} primaryText={"キーパー管理画面"}/>
+                <MenuItem onClick={this.Version} primaryText={"バージョン"}/>
             </Drawer>
             {main}
             </MuiThemeProvider>
