@@ -55,6 +55,9 @@ class App extends React.Component {
             width:"65%",
             height:"80%"
         }
+        var ViewStyle ={
+            width:"100%"
+        }
         return (
             React.createElement("div", null, 
                 React.createElement("header", {id: "title", style: titileStyle}, 
@@ -68,7 +71,7 @@ class App extends React.Component {
                 ), 
                 React.createElement("div", {id: "map", style: mapStyle, draggable: true}, 
                 React.createElement("input", {type: "file", onChange: this.onChange}), 
-                React.createElement("img", {src: imgURL})
+                React.createElement("img", {src: imgURL, style: ViewStyle})
                 )
             )
         )

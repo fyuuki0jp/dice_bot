@@ -54,6 +54,9 @@ class App extends React.Component {
             width:"65%",
             height:"80%"
         }
+        var ViewStyle ={
+            width:"100%"
+        }
         return (
             <div>
                 <header id="title" style={titileStyle}>
@@ -67,7 +70,7 @@ class App extends React.Component {
                 </div>
                 <div id="map" style = {mapStyle} draggable={true}>
                 <input type="file" onChange={this.onChange} />
-                <img src={imgURL}/>
+                <img src={imgURL} style={ViewStyle}/>
                 </div>
             </div>
         )
