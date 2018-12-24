@@ -2,28 +2,6 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 var socket = io.connect();
 
-class TalkView extends React.Component
-{
-    constructor(props)
-    {
-        super(props);
-        this.state = {
-            talk:props.talk
-        }
-    }
-    render()
-    {
-        const {talk} = this.state;
-        return (
-            <ul>
-              { talk.map((d, idx) => {
-                return <li key={idx}>{idx} : {d}</li>
-              }) }
-            </ul>
-          );
-    }
-}
-
 class App extends React.Component {
     constructor(props) {
         super(props);
@@ -73,7 +51,7 @@ class App extends React.Component {
                 </header>
                 <div id="talk" style = {talkStyle}>
                     トーク履歴<br/>
-                    <TalkView talk={talk}/>
+                    {talk.forEach((res)=>{return (<h5>{res}</h5>)})}
                 </div>
                 <div id="map" style = {mapStyle}>
 
