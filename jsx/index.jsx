@@ -51,7 +51,7 @@ class App extends React.Component {
                 </header>
                 <div id="talk" style = {talkStyle}>
                     トーク履歴<br/>
-                    {talk.forEach((res)=>{return (<h5>{res}</h5>)})}
+                    {talk.map((res)=>{return (<p>{res}</p>)})}
                 </div>
                 <div id="map" style = {mapStyle}>
 
