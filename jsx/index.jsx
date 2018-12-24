@@ -20,31 +20,31 @@ class App extends React.Component {
         var titileStyle = {
             position:"absolute",
             width:"100%",
-            height:"15%",
+            height:"10%",
             background:"#01A9DB",
             color:"#000000",
             
         }
         var talkStyle ={
-            top:"20%",
+            position:"absolute",
+            top:"15%",
             left:"70%",
             width:"30%",
             height:"80%",
-            position:"absolute",
             background:"#f2f2f3",
             color:"#000000"
         }
         var mapStyle ={
             position:"absolute",
-            top:"20%",
+            top:"15%",
             width:"65%",
             height:"80%"
         }
         return (
             <div>
-                <div id="title" style={titileStyle}>
-                    <h1> TRPG　GM管理画面</h1>
-                </div>
+                <header id="title" style={titileStyle}>
+                    <h1 style="text-align: center;"> TRPG　GM管理画面</h1>
+                </header>
                 <div id="talk" style = {talkStyle}>
                     {talk}
                 </div>
