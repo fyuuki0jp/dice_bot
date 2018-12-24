@@ -6,7 +6,7 @@ class TalkView extends React.Component
 {
     constructor(props)
     {
-        super(pros);
+        super(props);
         this.state = {
             talk:props.talk
         }
