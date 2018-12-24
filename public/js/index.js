@@ -37,7 +37,8 @@ class Keaper extends React.Component {
     }
     render() {
         var left = {
-            width: "70%"
+            width: "70%",
+            height:"100%"
         };
         var right = {
             left: "75%",
