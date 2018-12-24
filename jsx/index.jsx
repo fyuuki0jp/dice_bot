@@ -20,8 +20,8 @@ class App extends React.Component {
         var titileStyle = {
             position:"absolute",
             width:"100%",
-            height:"20%",
-            background:"#00eeee",
+            height:"15%",
+            background:"#ee00ee",
             color:"#000000"
         }
         var talkStyle ={
