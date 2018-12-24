@@ -53,7 +53,7 @@ class App extends React.Component {
                 React.createElement("div", {id: "talk", style: talkStyle}, 
                     "トーク履歴", React.createElement("br", null), 
                     React.createElement("ol", null, 
-                        talk.map((res)=>{return (res+React.createElement("br", null))})
+                        talk.map((res)=>{return (res+'\n')})
                     )
                 ), 
                 React.createElement("div", {id: "map", style: mapStyle}
