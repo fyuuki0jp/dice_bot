@@ -12,7 +12,7 @@ class App extends React.Component {
     componentWillMount()
     {
         socket.on("talk",(res)=>{
-            this.setState({talk:this.state.talk.push(res)});
+            this.setState({talk:this.state.talk.push(res+"<br/>")});
         })
     }
     render() {

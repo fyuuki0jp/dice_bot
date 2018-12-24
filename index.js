@@ -43,8 +43,11 @@ async function echoman(ev) {
 
   var command = ev.message.text;
 
+  io.emit("talk",ev.message.name+"："+ev.message.text);
+
   if (command.match('開始') || command.match('スタート')) {
     buke_count = 0;
+    io.emit("talk","Bot：ブーケのカウントを開始します。");
     return client.replyMessage(ev.replyToken, {
       type: "text",
       text: `ブーケのカウントを開始します。`
@@ -56,6 +59,7 @@ async function echoman(ev) {
   }
   else if (command.match('ストップ') || command.match('終了')) {
 
+    io.emit("talk","Bot：ブーケのカウントを終了します。\nブーケの個数は" + buke_count + 'でした。');
     return client.replyMessage(ev.replyToken, {
       type: "text",
       text: `ブーケのカウントを終了します。\nブーケの個数は` + buke_count + 'でした。'
@@ -78,6 +82,7 @@ async function echoman(ev) {
       resultA += tmp.toString();
       sum += tmp;
     }
+    io.emit("talk","Bot："+'result:' + sum + '(' + resultA + ')')
     return client.replyMessage(ev.replyToken, {
       type: "text",
       text: 'result:' + sum + '(' + resultA + ')'
@@ -122,6 +127,7 @@ async function echoman(ev) {
       count = ncount;
       ncount = 0;
     }
+    io.emit("talk","Bot：result:"+sum);
     return client.replyMessage(ev.replyToken, {
       type: "text",
       text: 'result:' + sum
@@ -140,6 +146,7 @@ async function echoman(ev) {
       }
       result += first.toString() + second.toString();
     }
+    io.emit("talk","Bot："+'result:' + result);
     return client.replyMessage(ev.replyToken, {
       type: "text",
       text: 'result:' + result
@@ -149,6 +156,7 @@ async function echoman(ev) {
     var dice = 10;
     var first = Math.floor(Math.random() * dice);
     var second = Math.floor(Math.random() * dice);
+    io.emit("talk","Bot："+'result:' + first.toString() + second.toString());
     return client.replyMessage(ev.replyToken, {
       type: "text",
       text: 'result:' + first.toString() + second.toString()
@@ -168,6 +176,7 @@ async function echoman(ev) {
       result += first.toString();
       sum += first;
     }
+    io.emit("talk","Bot："+'result:' + sum + '(' + result + ')')
     return client.replyMessage(ev.replyToken, {
       type: "text",
       text: 'result:' + sum + '(' + result + ')'
@@ -187,6 +196,7 @@ async function echoman(ev) {
       result += first.toString();
       sum += first;
     }
+    io.emit("talk","Bot："+'result:' + sum + '(' + result + ')')
     return client.replyMessage(ev.replyToken, {
       type: "text",
       text: 'result:' + sum + '(' + result + ')'
@@ -206,6 +216,7 @@ async function echoman(ev) {
       result += first.toString();
       sum += first;
     }
+    io.emit("talk","Bot："+'result:' + sum + '(' + result + ')')
     return client.replyMessage(ev.replyToken, {
       type: "text",
       text: 'result:' + sum + '(' + result + ')'
@@ -225,13 +236,11 @@ async function echoman(ev) {
       result += first.toString();
       sum += first;
     }
+    io.emit("talk","Bot："+'result:' + sum + '(' + result + ')')
     return client.replyMessage(ev.replyToken, {
       type: "text",
       text: 'result:' + sum + '(' + result + ')'
     })
-  }
-  else if (command.match('URL') || command.match('url') || command.match('ホーム')) {
-    server.address()
   }
   else {
     console.log("no adaptive text : " + command);
