@@ -31,7 +31,8 @@ class Keaper extends React.Component {
             data.type = "image/jpg";
 
             socket.emit('image', data);
-        }
+        };
+
         reader.readAsBinaryString(send_file);
     }
     render() {
@@ -44,16 +45,15 @@ class Keaper extends React.Component {
             background: "#f2f2f3"
         };
         return (
-            React.createElement("div", null, 
-                React.createElement("div", {draggable: true, style: left}, 
-                    React.createElement(DropZone, {onDrop: this.sendfile, accept: "image/jpg"}, 
-                        React.createElement("div", null, "画像をドラックまたはクリック")
-                    )
+            React.createElement(MuiThemeProvider, {muiTheme: getMuiTheme()}, 
+                React.createElement("div", {draggable: true, onDrop: this.sendfile, style: left}, 
+                React.createElement("div", null, "画像をドラックまたはクリック"), 
+                React.createElement("img", {id: "view"})
                 ), 
                 React.createElement("div", {draggable: false, style: right}
 
                 )
-            )
+                )
         )
     }
 }
