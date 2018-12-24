@@ -6,17 +6,49 @@ var socket = io.connect();
 class App extends React.Component {
     constructor(props) {
         super(props);
-
+        this.state = {
+            talk:[],
+        }
+    }
+    componentWillMount()
+    {
+        socket.on("talk",(res)=>{
+            this.setState({talk:this.state.talk.push(res)});
+        })
     }
     render() {
+        var {talk} = this.state;
         var titileStyle = {
+            position:"absolute",
             width:"100%",
-            background:"#00F0F0",
+            height:"20%",
+            background:"#eeeeee",
             color:"#FFFFFF"
         }
+        var talkStyle ={
+            width:"30%",
+            top:"20%",
+            left:"70%",
+            position:"absolute",
+            background:"#f2f2f3",
+            color:"#000000"
+        }
+        var mapStyle ={
+            position:"absolute",
+            width:"65%",
+            height:"80%"
+        }
         return (
-            React.createElement("div", {id: "title", style: titileStyle}, 
-                React.createElement("h1", null, "TRPG　GM管理画面")
+            React.createElement("div", null, 
+                React.createElement("div", {id: "title", style: titileStyle}, 
+                    React.createElement("h1", null, " TRPG　GM管理画面")
+                ), 
+                React.createElement("div", {id: "talk", style: talkStyle}, 
+                    talk
+                ), 
+                React.createElement("div", {id: "map", style: mapStyle}
+
+                )
             )
         )
     }
