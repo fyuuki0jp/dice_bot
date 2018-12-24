@@ -52,7 +52,7 @@ class Keaper extends React.Component
         return (
             <div >
                 <div draggable={true} style={left}>
-                    <DropZone onDrop={sendfile}  accept="image/jpg">
+                    <DropZone onDrop={this.sendfile}  accept="image/jpg">
                         <div>画像をドラックまたはクリック</div>
                     </DropZone>
                 </div>

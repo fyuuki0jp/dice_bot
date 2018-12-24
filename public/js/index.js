@@ -53,7 +53,7 @@ class Keaper extends React.Component
         return (
             React.createElement("div", null, 
                 React.createElement("div", {draggable: true, style: left}, 
-                    React.createElement(DropZone, {onDrop: sendfile, accept: "image/jpg"}, 
+                    React.createElement(DropZone, {onDrop: this.sendfile, accept: "image/jpg"}, 
                         React.createElement("div", null, "画像をドラックまたはクリック")
                     )
                 ), 
