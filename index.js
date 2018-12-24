@@ -42,8 +42,9 @@ async function echoman(ev) {
   const pro = await client.getProfile(ev.source.userId);
 
   var command = ev.message.text;
-
-  io.emit("talk",ev.message.name+"："+ev.message.text);
+  const userpro = await client.getProfile(ev.source.userId);
+  var user = userpro.displayName;
+  io.emit("talk",user+"："+ev.message.text);
 
   if (command.match('開始') || command.match('スタート')) {
     buke_count = 0;

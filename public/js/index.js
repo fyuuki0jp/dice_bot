@@ -14,7 +14,7 @@ class App extends React.Component {
     {
         var t = this.state.talk;
         socket.on("talk",(res)=>{
-            this.setState({talk:t.push(res+"<br/>")});
+            this.setState({talk:this.state.talk.concat([res])});
         })
     }
     render() {
