@@ -127,7 +127,7 @@ class App extends React.Component {
             ), 
             React.createElement(Drawer, {open: this.state.open, width: "30%", docked: true}, 
                 React.createElement(MenuItem, {onClick: this.Home, primaryText: "ホーム"}), 
-                React.createElement(ManuItem, {onClick: this.Keaper, primaryText: "キーパー管理画面"}), 
+                React.createElement(MenuItem, {onClick: this.Keaper, primaryText: "キーパー管理画面"}), 
                 React.createElement(MenuItem, {onClick: this.Version, primaryText: "バージョン"})
             ), 
             main

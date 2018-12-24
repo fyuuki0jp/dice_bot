@@ -126,7 +126,7 @@ class App extends React.Component {
             />
             <Drawer open={this.state.open} width="30%" docked={true}>
                 <MenuItem onClick={this.Home} primaryText="ホーム"/>
-                <ManuItem onClick={this.Keaper} primaryText="キーパー管理画面"/>
+                <MenuItem onClick={this.Keaper} primaryText="キーパー管理画面"/>
                 <MenuItem onClick={this.Version}primaryText="バージョン"/>
             </Drawer>
             {main}
