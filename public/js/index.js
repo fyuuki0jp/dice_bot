@@ -12,7 +12,7 @@ class App extends React.Component {
         var titileStyle = {
             width:"100%",
             background:"#00F0F0",
-            colof:"#FFFFFF"
+            color:"#FFFFFF"
         }
         return (
             React.createElement("div", {id: "title", style: titileStyle}, 
