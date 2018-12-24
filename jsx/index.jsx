@@ -10,7 +10,8 @@ class App extends React.Component {
     render() {
         var titileStyle = {
             width:"100%",
-            background:"#000F0F"
+            background:"#00F0F0",
+            colof:"#FFFFFF"
         }
         return (
             <div id="title" style={titileStyle}>
