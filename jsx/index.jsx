@@ -52,7 +52,7 @@ class App extends React.Component {
                 <div id="talk" style = {talkStyle}>
                     トーク履歴<br/>
                     <ol>
-                        {talk.map((res)=>{return (<li>{res}</li>)})}
+                        {talk.map((res)=>{return (res+"<br/>")})}
                     </ol>
                 </div>
                 <div id="map" style = {mapStyle}>
