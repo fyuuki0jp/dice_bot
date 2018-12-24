@@ -125,9 +125,9 @@ class App extends React.Component {
                 onLeftIconButtonClick={this.OpenMenu}
             />
             <Drawer open={this.state.open} width="30%" docked={true}>
-                <MenuItem onClick={this.Home}>ホーム</MenuItem>
-                <ManuItem onClick={this.Keaper}>キーパー管理画面</ManuItem>
-                <MenuItem onClick={this.Version}>バージョン</MenuItem>
+                <MenuItem onClick={this.Home} primaryText="ホーム"/>
+                <ManuItem onClick={this.Keaper} primaryText="キーパー管理画面"/>
+                <MenuItem onClick={this.Version}primaryText="バージョン"/>
             </Drawer>
             {main}
             </MuiThemeProvider>
