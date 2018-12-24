@@ -7,6 +7,7 @@ class App extends React.Component {
         super(props);
         this.state = {
             talk:["サンプル：ここにトーク履歴が記入されていきます。"],
+            imgURL:"",
         }
     }
     componentDidMount()
@@ -17,7 +18,7 @@ class App extends React.Component {
         })
     }
     render() {
-        var {talk} = this.state;
+        var {talk,imgURL} = this.state;
         var titileStyle = {
             position:"absolute",
             width:"100%",
@@ -55,8 +56,9 @@ class App extends React.Component {
                         {talk.map((res)=>{return (<li>{res}</li>)})}
                     </ul>
                 </div>
-                <div id="map" style = {mapStyle}>
-
+                <div id="map" style = {mapStyle} draggable={true}>
+                <input type="file" id="files" name="files[]" multiple />
+                <img src={imgURL}/>
                 </div>
             </div>
         )
