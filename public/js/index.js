@@ -134,7 +134,7 @@ class App extends React.Component {
                 React.createElement(MenuItem, {onClick: this.Home}, "ホーム"), 
                 React.createElement(MenuItem, {onClick: this.Keaper}, "GM管理画面")
             ), 
-            React.createElement("div", {id: "main", onClick: HideMenu}, 
+            React.createElement("div", {id: "main", onClick: this.HideMenu}, 
                 main
             )
             )

@@ -133,7 +133,7 @@ class App extends React.Component {
                 <MenuItem onClick={this.Home}>ホーム</MenuItem>
                 <MenuItem onClick={this.Keaper}>GM管理画面</MenuItem>
             </Drawer>
-            <div id="main" onClick={HideMenu}>
+            <div id="main" onClick={this.HideMenu}>
                 {main}
             </div>
             </MuiThemeProvider>
