@@ -6,7 +6,7 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            talk:[],
+            talk:["サンプル：ここにトーク履歴が記入されていきます。"],
         }
     }
     componentWillMount()
@@ -49,6 +49,7 @@ class App extends React.Component {
                     <h1 style={style}> TRPG　GM管理画面</h1>
                 </header>
                 <div id="talk" style = {talkStyle}>
+                    トーク履歴<br/>
                     {talk}
                 </div>
                 <div id="map" style = {mapStyle}>

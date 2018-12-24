@@ -7,7 +7,7 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            talk:[],
+            talk:["サンプル：ここにトーク履歴が記入されていきます。"],
         }
     }
     componentWillMount()
@@ -50,6 +50,7 @@ class App extends React.Component {
                     React.createElement("h1", {style: style}, " TRPG　GM管理画面")
                 ), 
                 React.createElement("div", {id: "talk", style: talkStyle}, 
+                    "トーク履歴", React.createElement("br", null), 
                     talk
                 ), 
                 React.createElement("div", {id: "map", style: mapStyle}
