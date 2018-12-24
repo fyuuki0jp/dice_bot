@@ -1,11 +1,8 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 var DropZone = require('react-dropzone');
-var MuiThemeProvider = require('material-ui/styles/MuiThemeProvider');
-const getMuiTheme = require('material-ui/styles/baseThemes/lightBaseTheme');
-var AppBar = require('material-ui/AppBar');
-var Drawer = require('material-ui/Drawer');
-var MenuItem = require('material-ui/MenuItem');
+const {getMuiTheme,MuiThemeProvider} = require('material-ui/styles');
+var {AppBar,Drawer,MenuItem} = require('material-ui');
 var socket = io.connect();
 
 class Home extends React.Component
@@ -98,6 +95,10 @@ class App extends React.Component {
     {
         this.setState({open:true});
     }
+    HideMenu()
+    {
+        this.setState({open:false});
+    }
     Home()
     {
         this.setState({open:false,mode:0});
@@ -114,23 +115,25 @@ class App extends React.Component {
     {
         
         var main = <Home/>
-        if(this.state.mode == 1)main = <Keaper/>
-        else if(this.state.mode==2)main=<Version/>
-
+        if(this.state.mode == 1)
+        {
+            main = <Keaper/>
+        }
 
         return (
-            <MuiThemeProvider muiTheme={getMuiTheme}>
+            <MuiThemeProvider muiTheme={getMuiTheme()}>
             <AppBar
                 title={"TRPGシステム(大工大TRPGサークル)"}
                 iconClassNameRight="muidocs-icon-navigation-expand-more"
                 onLeftIconButtonClick={this.OpenMenu}
             />
             <Drawer open={this.state.open} width="30%" docked={true}>
-                <MenuItem onClick={this.Home} primaryText={"ホーム"}/>
-                <MenuItem onClick={this.Keaper} primaryText={"キーパー管理画面"}/>
-                <MenuItem onClick={this.Version} primaryText={"バージョン"}/>
+                <MenuItem onClick={this.Home}>ホーム</MenuItem>
+                <MenuItem onClick={this.Keaper}>GM管理画面</MenuItem>
             </Drawer>
-            {main}
+            <div id="main" onClick={HideMenu}>
+                {main}
+            </div>
             </MuiThemeProvider>
         )
     }
