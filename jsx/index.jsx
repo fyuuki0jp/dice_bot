@@ -8,8 +8,10 @@ class App extends React.Component {
         this.state = {
             talk:["サンプル：ここにトーク履歴が記入されていきます。"],
             imgURL:"",
+            path:""
         }
         this.onChange = this.onChange.bind(this);
+        this.SendMap = this.SendMap.bind(this);
     }
     componentDidMount()
     {
@@ -18,14 +20,28 @@ class App extends React.Component {
             this.setState({talk:this.state.talk.concat([res])});
         })
     }
+    SendMap()
+    {
+        var reader = new FileReader();
+        var data = {}
+        reader.onload = function(event){
+            data.file = event.target.result;
+            data.name = this.state.path;
+            socket.emit("image",data);
+        }.bind(this);
+
+        reader.readAsBinaryString(this.state.path);
+    }
     onChange(e)
     {
         var reader = new FileReader();
+        this.setState({path:e.target.files[0]});
         reader.onload = function(read){
             this.setState({imgURL:read.target.result});
         }.bind(this);
         reader.readAsDataURL(e.target.files[0]);
     }
+
     render() {
         var {talk,imgURL} = this.state;
         var titileStyle = {
@@ -69,8 +85,9 @@ class App extends React.Component {
                     </ul>
                 </div>
                 <div id="map" style = {mapStyle} draggable={true}>
-                <input type="file" onChange={this.onChange} />
+                公開するマップ：<input type="file" onChange={this.onChange} />
                 <img src={imgURL} style={ViewStyle}/>
+                <button onClick={this.SendMap}>マップ公開</button>
                 </div>
             </div>
         )
