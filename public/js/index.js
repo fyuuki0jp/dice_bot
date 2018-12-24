@@ -3,6 +3,28 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 var socket = io.connect();
 
+class TalkView extends React.Component
+{
+    constructor(props)
+    {
+        super(pros);
+        this.state = {
+            talk:props.talk
+        }
+    }
+    render()
+    {
+        const {talk} = this.state;
+        return (
+            React.createElement("ul", null, 
+               talk.map((d, idx) => {
+                return React.createElement("li", {key: idx}, idx, " : ", d)
+              }) 
+            )
+          );
+    }
+}
+
 class App extends React.Component {
     constructor(props) {
         super(props);
@@ -52,7 +74,7 @@ class App extends React.Component {
                 ), 
                 React.createElement("div", {id: "talk", style: talkStyle}, 
                     "トーク履歴", React.createElement("br", null), 
-                    talk
+                    React.createElement(TalkView, {talk: talk})
                 ), 
                 React.createElement("div", {id: "map", style: mapStyle}
 
