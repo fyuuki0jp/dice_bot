@@ -256,6 +256,7 @@ io.on("connection", (sock) => {
   });
   sock.on("image", (res) => {
     var writeFile = res.file;
+    var writeName = res.name;
     var writePath = './public/map.jpg';//Σ(ﾟдﾟ) ｴｯ!? 
 
     console.log("recv image event");

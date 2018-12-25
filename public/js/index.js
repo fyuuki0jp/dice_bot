@@ -79,7 +79,7 @@ class App extends React.Component {
             height:"80%"
         }
         var ViewStyle ={
-            width:"100%"
+            height:"50%"
         }
         return (
             React.createElement("div", null, 
