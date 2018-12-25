@@ -17,7 +17,7 @@ var server = express()
   .set("views", path.join(__dirname, "views"))
   .set("view engine", "ejs")
   .get("/", (req, res) => res.render("pages/index"))
-  .get("/tmp/",(req,res) => getFile(req,res))
+  .get("/g/",(req,res) => getFile(req,res))
   .post("/hook/", line.middleware(config), (req, res) => Bot(req, res))
   .listen(PORT, () => console.log(`Listening on ${PORT}`));
 
