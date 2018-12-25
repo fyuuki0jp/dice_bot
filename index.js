@@ -289,7 +289,7 @@ io.on("connection", (sock) => {
         mimeType:uploadType,
         body:uploadData
       }
-    },console.log);
+    });
 
   });
 })
