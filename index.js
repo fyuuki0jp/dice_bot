@@ -291,12 +291,13 @@ io.on("connection", (sock) => {
         console.log("exception:" + exception);
       })
       .on('close', function () {
-        client.pushMessage('U0c2b0ec852da1f79690a16c776bfa624',
+        const res = client.pushMessage('U0c2b0ec852da1f79690a16c776bfa624',
         {
           type:"image",
           originalContentUrl:"https://immense-atoll-44982.herokuapp.com/g/?file="+uploadName,
           previewImageUrl:"https://immense-atoll-44982.herokuapp.com/g/?file="+uploadName
         })
+        console.log(res);
       })
       .on('pipe', function (src) { });
 
