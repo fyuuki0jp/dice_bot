@@ -55,6 +55,10 @@ async function echoman(ev) {
   if(command.match('セッション開始'))
   {
     id=ev.source.groupId;
+    return client.replyMessage(ev.replyToken,{
+      type:"text",
+      text:"セッションを開始します。"
+    })
   }
   else if (command.match('開始') || command.match('スタート')) {
     buke_count = 0;
@@ -266,7 +270,6 @@ io.on("connection", (sock) => {
   sock.on("image", (res) => {
     var uploadData = res.file;
     var uploadName = res.name;
-    var uploadType = res.type;
     var writePath = os.tmpdir()+'/'+uploadName;
     console.log("recv image event");
 
@@ -277,13 +280,17 @@ io.on("connection", (sock) => {
         console.log("exception:" + exception);
       })
       .on('close', function () {
-        const res = client.pushMessage(id,
+        client.pushMessage(id,
+          {
+            type:"text",
+            'text':'画像を送信します。'
+        });
+        client.pushMessage(id,
         {
           type:"image",
           originalContentUrl:"https://immense-atoll-44982.herokuapp.com/g/?file="+uploadName,
           previewImageUrl:"https://immense-atoll-44982.herokuapp.com/g/?file="+uploadName
         })
-        console.log(res);
       })
       .on('pipe', function (src) { });
 
