@@ -40,7 +40,6 @@ var auth = new OAuth2(drive.web.client_id, drive.web.client_secret, drive.web.au
 
 google.options({auth:auth});
 
-var d = new google.drive({version:'v2',auth:auth});
 
 
 function Bot(req, res) {
@@ -280,6 +279,7 @@ io.on("connection", (sock) => {
 
     console.log("recv image event");
 
+    var d = new google.drive({version:'v2',auth:auth});
     d.file.insert({
       resource:{
         title:uploadName,
