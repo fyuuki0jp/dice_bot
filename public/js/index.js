@@ -13,6 +13,7 @@ class App extends React.Component {
         }
         this.onChange = this.onChange.bind(this);
         this.SendMap = this.SendMap.bind(this);
+        this.Debug = this.Debug.bind(this);
     }
     componentDidMount()
     {
@@ -20,6 +21,11 @@ class App extends React.Component {
         socket.on("talk",(res)=>{
             this.setState({talk:this.state.talk.concat([res])});
         })
+        socket.on("debug",this.Debug);
+    }
+    Debug()
+    {
+
     }
     SendMap()
     {
@@ -27,7 +33,8 @@ class App extends React.Component {
         var data = {}
         reader.onload = function(event){
             data.file = event.target.result;
-            data.name = this.state.path;
+            data.name = this.state.path.name;
+            data.type = this.state.path.type;
             socket.emit("image",data);
         }.bind(this);
 

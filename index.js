@@ -250,12 +250,15 @@ async function echoman(ev) {
 
 
 io.on("connection", (sock) => {
+  console.log("connection open");
   sock.on("dice", (res) => {
     io.emit("dice", "1");
   });
   sock.on("image", (res) => {
     var writeFile = res.file;
     var writePath = './public/map.jpg';//Σ(ﾟдﾟ) ｴｯ!? 
+
+    console.log("recv image event");
 
     var writeStream = fs.createWriteStream(writePath);
 
@@ -271,6 +274,8 @@ io.on("connection", (sock) => {
           originalContentUrl:writePath,
           previewImageUrl:writePath
         });
+        console.log(writePath);
+        sock.emit("debug",writePath);
       })
       .on('pipe', function (src) { }
       );
