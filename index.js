@@ -7,15 +7,18 @@ var OAuth2 = google.auth.OAuth2;
 var fs = require('fs');
 
 const drive = {
-  web:{
-    client_id:"944090612097-q40c08q67vqf9kvseqttt8o4a5v9c4ia.apps.googleusercontent.com",
+  installed:{
+    client_id:"944090612097-4jvkedftarhfku0ala5n4udg8vevd78s.apps.googleusercontent.com",
     project_id:"trpgdrive",
     auth_uri:"https://accounts.google.com/o/oauth2/auth",
     token_uri:"https://www.googleapis.com/oauth2/v3/token",
     auth_provider_x509_cert_url:"https://www.googleapis.com/oauth2/v1/certs",
-    client_secret:"t_uzEmJLKe0oGr6EWR2AtpF-"
+    client_secret:"ndXQ0UKC1f0zp0hHBwKarHac",
+    redirect_uris:["urn:ietf:wg:oauth:2.0:oob","http://localhost"]
   }
 };
+
+const scope = 'https://www.googleapis.com/auth/drive.file';
 
 const config = {
   channelAccessToken: process.env.ACCESS_TOKEN,
@@ -36,7 +39,9 @@ var server = express()
 
 const io = require('socket.io')(server);
 
-var auth = new OAuth2(drive.web.client_id, drive.web.client_secret, drive.web.auth_uri);
+var auth = new OAuth2(drive.web.client_id, drive.web.client_secret, drive.web.redirect_uris);
+
+
 
 google.options({auth:auth});
 
@@ -268,6 +273,7 @@ async function echoman(ev) {
 
 async function upload(name,type,data)
 {
+
   const cloud = google.drive({version:'v3',auth:auth});
   const res = await cloud.files.create({
     resource:{
@@ -291,9 +297,20 @@ io.on("connection", (sock) => {
     var uploadData = res.file;
     var uploadName = res.name;
     var uploadType = res.type;
-
+    var writePath = "/tmp/"+uploadName;
     console.log("recv image event");
 
-    upload(uploadName,uploadType,uploadData).catch(console.error);
+    var writeStream = fs.createWriteStream(writePath);
+    writeStream.on('drain', function () { })
+      .on('error', function (exception) {
+        //エラー処理
+        console.log("exception:" + exception);
+      })
+      .on('close', function () {
+
+      })
+      .on('pipe', function (src) { });
+
+    writeStream.write(uploadData, 'binary');//バイナリでお願いする
   });
 })
