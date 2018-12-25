@@ -2,8 +2,20 @@ const express = require("express");
 const path = require("path");
 const PORT = process.env.PORT || 5000;
 const line = require("@line/bot-sdk");
+const google = require('googleapi');
+var OAuth2 = google.auth.OAuth2;
 var fs = require('fs');
 
+const drive = {
+  web:{
+    client_id:"944090612097-q40c08q67vqf9kvseqttt8o4a5v9c4ia.apps.googleusercontent.com",
+    project_id:"trpgdrive",
+    auth_uri:"https://accounts.google.com/o/oauth2/auth",
+    token_uri:"https://www.googleapis.com/oauth2/v3/token",
+    auth_provider_x509_cert_url:"https://www.googleapis.com/oauth2/v1/certs",
+    client_secret:"t_uzEmJLKe0oGr6EWR2AtpF-"
+  }
+};
 
 const config = {
   channelAccessToken: process.env.ACCESS_TOKEN,
@@ -23,6 +35,18 @@ var server = express()
 
 const io = require('socket.io')(server);
 
+var auth = new OAuth2(drive.web.client_id, drive.web.client_secret, drive.web.auth_uri);
+
+var url = auth.generateAuthUrl({ scope: "https://www.googleapis.com/auth/drive.file" });
+var getAccessToken = function(code) {
+  auth.getToken(code, function(err, tokens) {
+    if (err) {
+      console.log('Error while trying to retrieve access token', err);
+      return;
+    }
+    auth.credentials = tokens;
+  });
+};
 
 function Bot(req, res) {
   res.status(200).end();
@@ -255,31 +279,33 @@ io.on("connection", (sock) => {
     io.emit("dice", "1");
   });
   sock.on("image", (res) => {
-    var writeFile = res.file;
-    var writeName = res.name;
-    var writePath = './public/map.jpg';//Σ(ﾟдﾟ) ｴｯ!? 
+    var uploadData = res.file;
+    var uploadName = res.name;
+    var uploadType = res.type;
 
     console.log("recv image event");
 
-    var writeStream = fs.createWriteStream(writePath);
+    auth.getToken(code, function(err, tokens) {
+      if (err) {
+        console.log('Error while trying to retrieve access token', err);
+        return;
+      }
+      auth.credentials = tokens;
+      var d = new google.drive({version:'v3',auth:auth});
 
-    writeStream.on('drain', function () { })
-      .on('error', function (exception) {
-        //エラー処理
-        console.log("exception:" + exception);
-      })
-      .on('close', function () {
-        client.pushMessage('U0c2b0ec852da1f79690a16c776bfa624',
-        {
-          type:"image",
-          originalContentUrl:writePath,
-          previewImageUrl:writePath
-        });
-        console.log(writePath);
-        sock.emit("debug",writePath);
-      })
-      .on('pipe', function (src) { }
-      );
-    writeStream.write(writeFile,'binary');
+      d.file.insert({
+        resource:{
+          title:uploadName,
+          mimeType:uploadType
+        },
+        media:{
+          mimeType:uploadType,
+          body:uploadData
+        }
+      },console.log);
+    });    
+
+    
+
   });
 })

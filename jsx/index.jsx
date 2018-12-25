@@ -92,8 +92,8 @@ class App extends React.Component {
                     </ul>
                 </div>
                 <div id="map" style = {mapStyle} draggable={true}>
-                公開するマップ：<input type="file" onChange={this.onChange} />
-                <img src={imgURL} style={ViewStyle}/>
+                公開するマップ：<input type="file" onChange={this.onChange} /><br/>
+                <img src={imgURL} style={ViewStyle}/><br/>
                 <button onClick={this.SendMap}>マップ公開</button>
                 </div>
             </div>
