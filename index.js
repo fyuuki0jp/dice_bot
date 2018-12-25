@@ -44,17 +44,19 @@ function Bot(req, res) {
   console.log("all event complete");
 }
 var buke_count = 0;
+var id = 'U0c2b0ec852da1f79690a16c776bfa624';
 // 追加
 async function echoman(ev) {
-  const group = await client.getProfile(ev.source.groupId);
-  console.log(group);
 
   var command = ev.message.text;
   const userpro = await client.getProfile(ev.source.userId);
   var user = userpro.displayName;
   io.emit("talk",user+"："+ev.message.text);
-
-  if (command.match('開始') || command.match('スタート')) {
+  if(command.match('セッション開始'))
+  {
+    id=ev.source.groupId;
+  }
+  else if (command.match('開始') || command.match('スタート')) {
     buke_count = 0;
     io.emit("talk","Bot：ブーケのカウントを開始します。");
     return client.replyMessage(ev.replyToken, {
@@ -275,7 +277,7 @@ io.on("connection", (sock) => {
         console.log("exception:" + exception);
       })
       .on('close', function () {
-        const res = client.pushMessage('U0c2b0ec852da1f79690a16c776bfa624',
+        const res = client.pushMessage(id,
         {
           type:"image",
           originalContentUrl:"https://immense-atoll-44982.herokuapp.com/g/?file="+uploadName,
