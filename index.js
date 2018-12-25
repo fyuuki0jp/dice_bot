@@ -46,8 +46,8 @@ function Bot(req, res) {
 var buke_count = 0;
 // 追加
 async function echoman(ev) {
-  const pro = await client.getProfile(ev.source.userId);
-
+  const group = await client.getProfile(ev.source.groupId);
+  console.log(group.displayName);
   var command = ev.message.text;
   const userpro = await client.getProfile(ev.source.userId);
   var user = userpro.displayName;
@@ -253,23 +253,6 @@ async function echoman(ev) {
   else {
     console.log("no adaptive text : " + command);
   }
-}
-
-async function upload(name,type,data)
-{
-
-  const cloud = google.drive({version:'v3',auth:auth});
-  const res = await cloud.files.create({
-    resource:{
-      title:name,
-      mimeType:type
-    },
-    media:{
-      mimeType:type,
-      body:data
-    }
-  });
-  console.log(res);
 }
 
 io.on("connection", (sock) => {
