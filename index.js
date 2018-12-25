@@ -38,7 +38,7 @@ const io = require('socket.io')(server);
 var auth = new OAuth2(drive.web.client_id, drive.web.client_secret, drive.web.auth_uri);
 
 var url = auth.generateAuthUrl({ scope: "https://www.googleapis.com/auth/drive.file" });
-
+console.log('Visit url:'+url);
 function Bot(req, res) {
   res.status(200).end();
   // ここから追加
