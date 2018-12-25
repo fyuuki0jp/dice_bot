@@ -276,7 +276,8 @@ io.on("connection", (sock) => {
 
     console.log("recv image event");
 
-    auth.getToken(code, function(err, tokens) {
+
+    auth.getToken(drive.web.token_uri, function(err, tokens) {
       if (err) {
         console.log('Error while trying to retrieve access token', err);
         return;
