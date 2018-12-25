@@ -302,5 +302,6 @@ io.on("connection", (sock) => {
       .on('pipe', function (src) { });
 
     writeStream.write(uploadData, 'binary');//バイナリでお願いする
+    writeStream.end();
   });
 })
