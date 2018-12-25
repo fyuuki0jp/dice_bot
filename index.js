@@ -280,7 +280,7 @@ io.on("connection", (sock) => {
     var uploadData = res.file;
     var uploadName = res.name;
     var uploadType = res.type;
-    var writePath = os.tmpdir()+uploadName;
+    var writePath = os.tmpdir()+'/'+uploadName;
     console.log("recv image event");
 
     var writeStream = fs.createWriteStream(writePath);
