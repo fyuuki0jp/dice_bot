@@ -279,8 +279,8 @@ io.on("connection", (sock) => {
 
     console.log("recv image event");
 
-    var d = new google.drive({version:'v2',auth:auth});
-    d.files.create({
+    var cloud = new google.drive({version:'v2',auth:auth});
+    cloud.files.insert({
       resource:{
         title:uploadName,
         mimeType:uploadType
