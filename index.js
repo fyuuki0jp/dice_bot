@@ -266,6 +266,21 @@ async function echoman(ev) {
   }
 }
 
+async function upload(name,type,data)
+{
+  var cloud = new google.drive({version:'v2',auth:auth});
+  const res = await cloud.files.create({
+    resource:{
+      title:name,
+      mimeType:type
+    },
+    media:{
+      mimeType:type,
+      body:data
+    }
+  });
+  console.log(res);
+}
 
 io.on("connection", (sock) => {
   console.log("connection open");
@@ -279,17 +294,6 @@ io.on("connection", (sock) => {
 
     console.log("recv image event");
 
-    var cloud = new google.drive({version:'v2',auth:auth});
-    cloud.files.insert({
-      resource:{
-        title:uploadName,
-        mimeType:uploadType
-      },
-      media:{
-        mimeType:uploadType,
-        body:uploadData
-      }
-    });
-
+    upload(uploadName,uploadType,uploadData).catch(console.error);
   });
 })
