@@ -3,7 +3,7 @@ const path = require("path");
 const PORT = process.env.PORT || 5000;
 const line = require("@line/bot-sdk");
 const {google} = require('googleapis');
-var OAuth2 = google.auth.OAuth2;
+var OAuth3 = google.auth.OAuth2;
 var fs = require('fs');
 
 const drive = {
@@ -35,7 +35,7 @@ var server = express()
 
 const io = require('socket.io')(server);
 
-var auth = new OAuth2(drive.web.client_id, drive.web.client_secret, drive.web.auth_uri);
+var auth = new OAuth3(drive.web.client_id, drive.web.client_secret, drive.web.auth_uri);
 
 var url = auth.generateAuthUrl({ scope: "https://www.googleapis.com/auth/drive.file" });
 console.log('Visit url:'+url);
