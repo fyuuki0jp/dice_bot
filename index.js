@@ -25,7 +25,7 @@ const io = require('socket.io')(server);
 
 function getFile(req,res)
 {
-  var path = os.tmpdir()+'/'+req.query;
+  var path = os.tmpdir()+'/'+req.query.file;
   res.sendFile(path);
   console.log(path);
 }
