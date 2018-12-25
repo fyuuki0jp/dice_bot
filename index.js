@@ -21,6 +21,7 @@ const config = {
   channelAccessToken: process.env.ACCESS_TOKEN,
   channelSecret: process.env.SECRET_KEY
 };
+
 const client = new line.Client(config); // 追加
 
 var server = express()
@@ -36,19 +37,11 @@ var server = express()
 const io = require('socket.io')(server);
 
 var auth = new OAuth2(drive.web.client_id, drive.web.client_secret, drive.web.auth_uri);
-var url = auth.generateAuthUrl({ scope: "https://www.googleapis.com/auth/drive.file" });
-console.log('Visit url:'+url);
-var d;
 
-auth.getToken(drive.web.token_uri, function(err, tokens) {
-  if (err) {
-    console.log('Error while trying to retrieve access token', err);
-    return;
-  }
-  auth.credentials = tokens;
-  d = new google.drive({version:'v3',auth:auth});
+google.options({auth:auth});
 
-});
+var d = new google.drive({version:'v2',auth:auth});
+
 
 function Bot(req, res) {
   res.status(200).end();
