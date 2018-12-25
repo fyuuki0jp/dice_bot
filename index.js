@@ -3,6 +3,7 @@ const path = require("path");
 const PORT = process.env.PORT || 5000;
 const line = require("@line/bot-sdk");
 var fs = require('fs');
+var os = require('os');
 
 const config = {
   channelAccessToken: process.env.ACCESS_TOKEN,
@@ -19,11 +20,16 @@ var server = express()
   .get("/g/", (req, res) => res.json({ method: "こんにちは、getさん" }))
   .post("/p/", (req, res) => res.json({ method: "こんにちは、postさん" }))
   .post("/hook/", line.middleware(config), (req, res) => Bot(req, res))
+  .get("/tmp/",(req,res) => getFile(req,res))
   .listen(PORT, () => console.log(`Listening on ${PORT}`));
 
 const io = require('socket.io')(server);
 
-
+function getFile(req,res)
+{
+  console.log(req);
+  console.log(res);
+}
 
 
 function Bot(req, res) {
@@ -276,7 +282,7 @@ io.on("connection", (sock) => {
     var uploadData = res.file;
     var uploadName = res.name;
     var uploadType = res.type;
-    var writePath = "/tmp/"+uploadName;
+    var writePath = os.tmpdir()+uploadName;
     console.log("recv image event");
 
     var writeStream = fs.createWriteStream(writePath);
