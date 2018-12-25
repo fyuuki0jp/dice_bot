@@ -2,23 +2,7 @@ const express = require("express");
 const path = require("path");
 const PORT = process.env.PORT || 5000;
 const line = require("@line/bot-sdk");
-const {google} = require('googleapis');
-var OAuth2 = google.auth.OAuth2;
 var fs = require('fs');
-
-const drive = {
-  installed:{
-    client_id:"944090612097-4jvkedftarhfku0ala5n4udg8vevd78s.apps.googleusercontent.com",
-    project_id:"trpgdrive",
-    auth_uri:"https://accounts.google.com/o/oauth2/auth",
-    token_uri:"https://www.googleapis.com/oauth2/v3/token",
-    auth_provider_x509_cert_url:"https://www.googleapis.com/oauth2/v1/certs",
-    client_secret:"ndXQ0UKC1f0zp0hHBwKarHac",
-    redirect_uris:["urn:ietf:wg:oauth:2.0:oob","http://localhost"]
-  }
-};
-
-const scope = 'https://www.googleapis.com/auth/drive.file';
 
 const config = {
   channelAccessToken: process.env.ACCESS_TOKEN,
@@ -39,11 +23,6 @@ var server = express()
 
 const io = require('socket.io')(server);
 
-var auth = new OAuth2(drive.web.client_id, drive.web.client_secret, drive.web.redirect_uris);
-
-
-
-google.options({auth:auth});
 
 
 
@@ -297,7 +276,7 @@ io.on("connection", (sock) => {
     var uploadData = res.file;
     var uploadName = res.name;
     var uploadType = res.type;
-    var writePath = "/tmp/"+uploadName;
+    var writePath = "./tmp/"+uploadName;
     console.log("recv image event");
 
     var writeStream = fs.createWriteStream(writePath);
