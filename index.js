@@ -3,7 +3,7 @@ const path = require("path");
 const PORT = process.env.PORT || 5000;
 const line = require("@line/bot-sdk");
 const {google} = require('googleapis');
-var OAuth3 = google.auth.OAuth2;
+var OAuth2 = google.auth.OAuth2;
 var fs = require('fs');
 
 const drive = {
@@ -35,10 +35,21 @@ var server = express()
 
 const io = require('socket.io')(server);
 
-var auth = new OAuth3(drive.web.client_id, drive.web.client_secret, drive.web.auth_uri);
-
+var auth = new OAuth2(drive.web.client_id, drive.web.client_secret, drive.web.token_uri);
 var url = auth.generateAuthUrl({ scope: "https://www.googleapis.com/auth/drive.file" });
 console.log('Visit url:'+url);
+var d;
+
+auth.getToken(drive.web.token_uri, function(err, tokens) {
+  if (err) {
+    console.log('Error while trying to retrieve access token', err);
+    return;
+  }
+  auth.credentials = tokens;
+  d = new google.drive({version:'v3',auth:auth});
+
+});
+
 function Bot(req, res) {
   res.status(200).end();
   // ここから追加
@@ -276,28 +287,16 @@ io.on("connection", (sock) => {
 
     console.log("recv image event");
 
-
-    auth.getToken(drive.web.token_uri, function(err, tokens) {
-      if (err) {
-        console.log('Error while trying to retrieve access token', err);
-        return;
+    d.file.insert({
+      resource:{
+        title:uploadName,
+        mimeType:uploadType
+      },
+      media:{
+        mimeType:uploadType,
+        body:uploadData
       }
-      auth.credentials = tokens;
-      var d = new google.drive({version:'v3',auth:auth});
-
-      d.file.insert({
-        resource:{
-          title:uploadName,
-          mimeType:uploadType
-        },
-        media:{
-          mimeType:uploadType,
-          body:uploadData
-        }
-      },console.log);
-    });    
-
-    
+    },console.log);
 
   });
 })
