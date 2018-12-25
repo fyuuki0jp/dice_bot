@@ -27,8 +27,8 @@ const io = require('socket.io')(server);
 
 function getFile(req,res)
 {
+  res.status(200).end();
   console.log(req);
-  console.log(res);
 }
 
 
