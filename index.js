@@ -47,7 +47,8 @@ var buke_count = 0;
 // 追加
 async function echoman(ev) {
   const group = await client.getProfile(ev.source.groupId);
-  console.log(group.displayName);
+  console.log(group);
+
   var command = ev.message.text;
   const userpro = await client.getProfile(ev.source.userId);
   var user = userpro.displayName;
