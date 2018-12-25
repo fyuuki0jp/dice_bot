@@ -38,15 +38,6 @@ const io = require('socket.io')(server);
 var auth = new OAuth2(drive.web.client_id, drive.web.client_secret, drive.web.auth_uri);
 
 var url = auth.generateAuthUrl({ scope: "https://www.googleapis.com/auth/drive.file" });
-var getAccessToken = function(code) {
-  auth.getToken(code, function(err, tokens) {
-    if (err) {
-      console.log('Error while trying to retrieve access token', err);
-      return;
-    }
-    auth.credentials = tokens;
-  });
-};
 
 function Bot(req, res) {
   res.status(200).end();
