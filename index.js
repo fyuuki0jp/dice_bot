@@ -268,7 +268,7 @@ async function echoman(ev) {
 
 async function upload(name,type,data)
 {
-  var cloud = new google.drive({version:'v2',auth:auth});
+  const cloud = google.drive({version:'v3',auth:auth});
   const res = await cloud.files.create({
     resource:{
       title:name,
