@@ -17,10 +17,8 @@ var server = express()
   .set("views", path.join(__dirname, "views"))
   .set("view engine", "ejs")
   .get("/", (req, res) => res.render("pages/index"))
-  .get("/g/", (req, res) => res.json({ method: "こんにちは、getさん" }))
-  .post("/p/", (req, res) => res.json({ method: "こんにちは、postさん" }))
-  .post("/hook/", line.middleware(config), (req, res) => Bot(req, res))
   .get("/tmp/",(req,res) => getFile(req,res))
+  .post("/hook/", line.middleware(config), (req, res) => Bot(req, res))
   .listen(PORT, () => console.log(`Listening on ${PORT}`));
 
 const io = require('socket.io')(server);
