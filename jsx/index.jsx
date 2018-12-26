@@ -222,8 +222,13 @@ class App extends React.Component {
     LogDownload()
     {
         const {talk} = this.state;
+        var save = talk.concat();
 
-        var bolb = new Blob([talk],{type:"text/plain"});
+        var s = '';
+        save.forEach((value)=>{
+            s += value+'\n';
+        })
+        var bolb = new Blob([s],{type:"text/plain"});
 
         var a = document.createElement('a');
         a.download = "session.txt";
