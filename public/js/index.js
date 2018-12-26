@@ -40,6 +40,7 @@ class App extends React.Component {
         this.ExecuteDice = this.ExecuteDice.bind(this);
         this.Comment = this.Comment.bind(this);
         this.SendMessage = this.SendMessage.bind(this);
+        this.LogDownload = this.LogDownload.bind(this);
     }
     componentDidMount()
     {
@@ -216,7 +217,19 @@ class App extends React.Component {
             if(i != 0)result+=',';
             result += tmp.toString();
         }
-        this.setState({result:sum.toString()+'('+result+')'});
+        var log = sum.toString()+'('+result+')';
+        this.setState({result:log,talk:this.state.talk.concat(["シークレットダイス：("+count+'D'+dice+")="+log])});
+    }
+    LogDownload()
+    {
+        const {talk} = this.state;
+
+        var bolb = new Blob([talk],{type:"text/plain"});
+
+        var a = document.createElement('a');
+        a.download = "session.txt";
+        a.href = window.URL.createObjectURL(bolb);
+        a.click();
     }
     render() {
         var {talk,imgURL,dice,count,result,comment} = this.state;
@@ -245,7 +258,8 @@ class App extends React.Component {
                     ), 
                     React.createElement("button", {onClick: this.ExecuteDice}, "ダイスを振る"), React.createElement("br", null), 
                     "結果：", result, 
-                    React.createElement("br", null), React.createElement("input", {type: "text", value: comment, onChange: this.Comment}), React.createElement("button", {onClick: this.SendMessage}, "コメント送信")
+                    React.createElement("br", null), React.createElement("input", {type: "text", value: comment, onChange: this.Comment}), React.createElement("button", {onClick: this.SendMessage}, "コメント送信"), 
+                    React.createElement("br", null), React.createElement("button", {onClick: this.LogDownload}, "トーク履歴保存")
                 ), 
                 React.createElement("div", {id: "talk", style: talkStyle}, 
                     "トーク履歴", React.createElement("br", null), 

@@ -300,6 +300,7 @@ io.on("connection", (sock) => {
             originalContentUrl: "https://immense-atoll-44982.herokuapp.com/g/?file=" + uploadName,
             previewImageUrl: "https://immense-atoll-44982.herokuapp.com/g/?file=" + uploadName
           }])
+          io.emit("talk","GM：マップを公開しました。");
       })
       .on('pipe', function (src) { });
 
