@@ -233,6 +233,7 @@ class App extends React.Component {
 
         var a = document.createElement('a');
         a.download = "session.txt";
+        a.target = "_blank";
         a.href = window.URL.createObjectURL(bolb);
         a.click();
     }
