@@ -104,12 +104,14 @@ class App extends React.Component {
             position:"float",
             height:"10%",
             background: "#01A9DB",
-            color: "#000000",
+            color: "#000000"
         };
         var h1 = {
             margin:"0px",
             padding:"0px",
-            "text-align":"center"
+            "text-align":"center",
+            background: "#01A9DB",
+            color: "#000000"
         };
         var talk = {
             width:"80%",
@@ -178,7 +180,7 @@ class App extends React.Component {
                 ), 
                 React.createElement("div", {id: "talk", style: talkStyle}, 
                     "トーク履歴", React.createElement("br", null), 
-                    React.createElement("ul", {style: {"list-style-type": "none"}}, 
+                    React.createElement("ul", {style: {"list-style-type": "none",height:"100%",overflow:"auto"}}, 
                         talk.map((res)=>{return (React.createElement("li", null, res))})
                     )
                 )

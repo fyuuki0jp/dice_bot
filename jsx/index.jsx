@@ -103,12 +103,14 @@ class App extends React.Component {
             position:"float",
             height:"10%",
             background: "#01A9DB",
-            color: "#000000",
+            color: "#000000"
         };
         var h1 = {
             margin:"0px",
             padding:"0px",
-            "text-align":"center"
+            "text-align":"center",
+            background: "#01A9DB",
+            color: "#000000"
         };
         var talk = {
             width:"80%",
@@ -177,7 +179,7 @@ class App extends React.Component {
                 </div>
                 <div id="talk" style = {talkStyle}>
                     トーク履歴<br/>
-                    <ul style={{"list-style-type": "none"}}>
+                    <ul style={{"list-style-type": "none",height:"100%",overflow:"auto"}}>
                         {talk.map((res)=>{return (<li>{res}</li>)})}
                     </ul>
                 </div>
