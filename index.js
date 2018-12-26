@@ -57,22 +57,20 @@ async function echoman(ev) {
     id=ev.source.groupId;
     
     return client.replyMessage(ev.replyToken,
-      {
-        messages: [
+      [
           {
             type: "text",
             text: "セッションを開始します。"
           },
           {
             type:"text",
-            text:"GMは以下のURLにアクセスしてくださ。"
+            text:"GMは以下のURLにアクセスしてくださ。タブレット,PCでの閲覧を推奨します。"
           },
           {
             type:"text",
             text:"https://immense-atoll-44982.herokuapp.com"
           }
         ]
-      }
     )
   }
   else if (command.match('開始') || command.match('スタート')) {
