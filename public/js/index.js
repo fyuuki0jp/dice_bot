@@ -100,6 +100,12 @@ class App extends React.Component {
             width: "65%",
             height: "80%"
         }
+        var dice = {
+            position: "absolute",
+            top: "65%",
+            width: "35%",
+            height: "80%"
+        }
         var view = {
             height: "50%"
         }
