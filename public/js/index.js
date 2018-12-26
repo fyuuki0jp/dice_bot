@@ -234,7 +234,7 @@ class App extends React.Component {
     render() {
         var {talk,imgURL,dice,count,result,comment} = this.state;
         var {titleStyle,style,talkStyle,mapStyle,ViewStyle,diceStyle} = this.getStyle();
-
+        var view = talk;
         return (
             React.createElement("div", null, 
                 React.createElement("header", {id: "title", style: titleStyle}, 
@@ -264,7 +264,7 @@ class App extends React.Component {
                 React.createElement("div", {id: "talk", style: talkStyle}, 
                     "トーク履歴", React.createElement("br", null), 
                     React.createElement("ul", {style: {"list-style-type": "none",height:"100%",overflow:"auto"}}, 
-                        talk.reverse().map((res)=>{return (React.createElement("li", null, res))})
+                        view.reverse().map((res)=>{return (React.createElement("li", null, res))})
                     )
                 )
             )

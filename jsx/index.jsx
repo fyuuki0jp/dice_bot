@@ -233,7 +233,7 @@ class App extends React.Component {
     render() {
         var {talk,imgURL,dice,count,result,comment} = this.state;
         var {titleStyle,style,talkStyle,mapStyle,ViewStyle,diceStyle} = this.getStyle();
-
+        var view = talk;
         return (
             <div>
                 <header id="title" style={titleStyle}>
@@ -263,7 +263,7 @@ class App extends React.Component {
                 <div id="talk" style = {talkStyle}>
                     トーク履歴<br/>
                     <ul style={{"list-style-type": "none",height:"100%",overflow:"auto"}}>
-                        {talk.reverse().map((res)=>{return (<li>{res}</li>)})}
+                        {view.reverse().map((res)=>{return (<li>{res}</li>)})}
                     </ul>
                 </div>
             </div>
