@@ -17,15 +17,14 @@ var server = express()
   .set("views", path.join(__dirname, "views"))
   .set("view engine", "ejs")
   .get("/", (req, res) => res.render("pages/index"))
-  .get("/g/",(req,res) => getFile(req,res))
+  .get("/g/", (req, res) => getFile(req, res))
   .post("/hook/", line.middleware(config), (req, res) => Bot(req, res))
   .listen(PORT, () => console.log(`Listening on ${PORT}`));
 
 const io = require('socket.io')(server);
 
-function getFile(req,res)
-{
-  var path = os.tmpdir()+'/'+req.query.file;
+function getFile(req, res) {
+  var path = os.tmpdir() + '/' + req.query.file;
   res.sendFile(path);
   console.log(path);
 }
@@ -51,31 +50,30 @@ async function echoman(ev) {
   var command = ev.message.text;
   const userpro = await client.getProfile(ev.source.userId);
   var user = userpro.displayName;
-  io.emit("talk",user+"："+ev.message.text);
-  if(command.match('セッション開始'))
-  {
-    id=ev.source.groupId;
-    
+  io.emit("talk", user + "：" + ev.message.text);
+  if (command.match('セッション開始')) {
+    id = ev.source.groupId;
+
     return client.replyMessage(ev.replyToken,
       [
-          {
-            type: "text",
-            text: "セッションを開始します。"
-          },
-          {
-            type:"text",
-            text:"GMは以下のURLにアクセスしてくださ。タブレット,PCでの閲覧を推奨します。"
-          },
-          {
-            type:"text",
-            text:"https://immense-atoll-44982.herokuapp.com"
-          }
-        ]
+        {
+          type: "text",
+          text: "セッションを開始します。"
+        },
+        {
+          type: "text",
+          text: "GMは以下のURLにアクセスしてくださ。タブレット,PCでの閲覧を推奨します。"
+        },
+        {
+          type: "text",
+          text: "https://immense-atoll-44982.herokuapp.com"
+        }
+      ]
     )
   }
   else if (command.match('開始') || command.match('スタート')) {
     buke_count = 0;
-    io.emit("talk","Bot：ブーケのカウントを開始します。");
+    io.emit("talk", "Bot：ブーケのカウントを開始します。");
     return client.replyMessage(ev.replyToken, {
       type: "text",
       text: `ブーケのカウントを開始します。`
@@ -87,7 +85,7 @@ async function echoman(ev) {
   }
   else if (command.match('ストップ') || command.match('終了')) {
 
-    io.emit("talk","Bot：ブーケのカウントを終了します。\nブーケの個数は" + buke_count + 'でした。');
+    io.emit("talk", "Bot：ブーケのカウントを終了します。\nブーケの個数は" + buke_count + 'でした。');
     return client.replyMessage(ev.replyToken, {
       type: "text",
       text: `ブーケのカウントを終了します。\nブーケの個数は` + buke_count + 'でした。'
@@ -110,7 +108,7 @@ async function echoman(ev) {
       resultA += tmp.toString();
       sum += tmp;
     }
-    io.emit("talk","Bot："+'result:' + sum + '(' + resultA + ')')
+    io.emit("talk", "Bot：" + 'result:' + sum + '(' + resultA + ')')
     return client.replyMessage(ev.replyToken, {
       type: "text",
       text: 'result:' + sum + '(' + resultA + ')'
@@ -155,7 +153,7 @@ async function echoman(ev) {
       count = ncount;
       ncount = 0;
     }
-    io.emit("talk","Bot：result:"+sum);
+    io.emit("talk", "Bot：result:" + sum);
     return client.replyMessage(ev.replyToken, {
       type: "text",
       text: 'result:' + sum
@@ -174,7 +172,7 @@ async function echoman(ev) {
       }
       result += first.toString() + second.toString();
     }
-    io.emit("talk","Bot："+'result:' + result);
+    io.emit("talk", "Bot：" + 'result:' + result);
     return client.replyMessage(ev.replyToken, {
       type: "text",
       text: 'result:' + result
@@ -184,7 +182,7 @@ async function echoman(ev) {
     var dice = 10;
     var first = Math.floor(Math.random() * dice);
     var second = Math.floor(Math.random() * dice);
-    io.emit("talk","Bot："+'result:' + first.toString() + second.toString());
+    io.emit("talk", "Bot：" + 'result:' + first.toString() + second.toString());
     return client.replyMessage(ev.replyToken, {
       type: "text",
       text: 'result:' + first.toString() + second.toString()
@@ -204,7 +202,7 @@ async function echoman(ev) {
       result += first.toString();
       sum += first;
     }
-    io.emit("talk","Bot："+'result:' + sum + '(' + result + ')')
+    io.emit("talk", "Bot：" + 'result:' + sum + '(' + result + ')')
     return client.replyMessage(ev.replyToken, {
       type: "text",
       text: 'result:' + sum + '(' + result + ')'
@@ -224,7 +222,7 @@ async function echoman(ev) {
       result += first.toString();
       sum += first;
     }
-    io.emit("talk","Bot："+'result:' + sum + '(' + result + ')')
+    io.emit("talk", "Bot：" + 'result:' + sum + '(' + result + ')')
     return client.replyMessage(ev.replyToken, {
       type: "text",
       text: 'result:' + sum + '(' + result + ')'
@@ -244,7 +242,7 @@ async function echoman(ev) {
       result += first.toString();
       sum += first;
     }
-    io.emit("talk","Bot："+'result:' + sum + '(' + result + ')')
+    io.emit("talk", "Bot：" + 'result:' + sum + '(' + result + ')')
     return client.replyMessage(ev.replyToken, {
       type: "text",
       text: 'result:' + sum + '(' + result + ')'
@@ -264,7 +262,7 @@ async function echoman(ev) {
       result += first.toString();
       sum += first;
     }
-    io.emit("talk","Bot："+'result:' + sum + '(' + result + ')')
+    io.emit("talk", "Bot：" + 'result:' + sum + '(' + result + ')')
     return client.replyMessage(ev.replyToken, {
       type: "text",
       text: 'result:' + sum + '(' + result + ')'
@@ -283,7 +281,7 @@ io.on("connection", (sock) => {
   sock.on("image", (res) => {
     var uploadData = res.file;
     var uploadName = res.name;
-    var writePath = os.tmpdir()+'/'+uploadName;
+    var writePath = os.tmpdir() + '/' + uploadName;
     console.log("recv image event");
 
     var writeStream = fs.createWriteStream(writePath);
@@ -294,16 +292,14 @@ io.on("connection", (sock) => {
       })
       .on('close', function () {
         client.pushMessage(id,
-          {
-            type:"text",
-            'text':'画像を送信します。'
-        });
-        client.pushMessage(id,
-        {
-          type:"image",
-          originalContentUrl:"https://immense-atoll-44982.herokuapp.com/g/?file="+uploadName,
-          previewImageUrl:"https://immense-atoll-44982.herokuapp.com/g/?file="+uploadName
-        })
+          [{
+            type: "text",
+            'text': '画像を送信します。'
+          }, {
+            type: "image",
+            originalContentUrl: "https://immense-atoll-44982.herokuapp.com/g/?file=" + uploadName,
+            previewImageUrl: "https://immense-atoll-44982.herokuapp.com/g/?file=" + uploadName
+          }])
       })
       .on('pipe', function (src) { });
 

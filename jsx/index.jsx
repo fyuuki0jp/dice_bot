@@ -176,7 +176,8 @@ class App extends React.Component {
                 <div id="map" style = {mapStyle} draggable={true}>
                 公開するマップ：<input type="file" onChange={this.onChange} /><br/>
                 <img src={imgURL} style={ViewStyle}/><br/>
-                <button onClick={this.SendMap}>マップ公開</button>
+                <button onClick={this.SendMap}>マップ公開</button><br/>
+                
                 </div>
                 <div id="talk" style = {talkStyle}>
                     トーク履歴<br/>

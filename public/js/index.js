@@ -177,7 +177,8 @@ class App extends React.Component {
                 React.createElement("div", {id: "map", style: mapStyle, draggable: true}, 
                 "公開するマップ：", React.createElement("input", {type: "file", onChange: this.onChange}), React.createElement("br", null), 
                 React.createElement("img", {src: imgURL, style: ViewStyle}), React.createElement("br", null), 
-                React.createElement("button", {onClick: this.SendMap}, "マップ公開")
+                React.createElement("button", {onClick: this.SendMap}, "マップ公開"), React.createElement("br", null)
+                
                 ), 
                 React.createElement("div", {id: "talk", style: talkStyle}, 
                     "トーク履歴", React.createElement("br", null), 
