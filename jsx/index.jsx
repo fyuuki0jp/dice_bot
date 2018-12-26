@@ -2,13 +2,25 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 var socket = io.connect();
 
+var getDevice = (function(){
+    var ua = navigator.userAgent;
+    if(ua.indexOf('iPhone') > 0 || ua.indexOf('iPod') > 0 || ua.indexOf('Android') > 0 && ua.indexOf('Mobile') > 0){
+        return 'sp';
+    }else if(ua.indexOf('iPad') > 0 || ua.indexOf('Android') > 0){
+        return 'tab';
+    }else{
+        return 'other';
+    }
+})();
+
 class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             talk:["サンプル：ここにトーク履歴が記入されていきます。"],
             imgURL:"",
-            path:""
+            path:"",
+            mode:getDevice
         }
         this.onChange = this.onChange.bind(this);
         this.SendMap = this.SendMap.bind(this);
@@ -22,9 +34,9 @@ class App extends React.Component {
         })
         socket.on("debug",this.Debug);
     }
-    Debug()
+    Debug(res)
     {
-
+        console.log(res);
     }
     SendMap()
     {
@@ -48,53 +60,118 @@ class App extends React.Component {
         }.bind(this);
         reader.readAsDataURL(e.target.files[0]);
     }
+    Other()
+    {
+        var title = {
+            position: "absolute",
+            width: "100%",
+            height: "10%",
+            background: "#01A9DB",
+            color: "#000000",
 
-    render() {
-        var {talk,imgURL} = this.state;
-        var titileStyle = {
-            position:"absolute",
-            width:"100%",
-            height:"10%",
-            background:"#01A9DB",
-            color:"#000000",
-            
         }
-        var style = {
+        var h1 = {
+            "text-align": "center"
+        }
+        var talk = {
+            position: "absolute",
+            top: "15%",
+            left: "70%",
+            width: "30%",
+            height: "80%",
+            background: "#f2f2f3",
+            color: "#000000"
+        }
+        var map = {
+            position: "absolute",
+            top: "15%",
+            width: "65%",
+            height: "80%"
+        }
+        var view = {
+            height: "50%"
+        }
+        return { titleStyle: title, style: h1,talkStyle:talk, mapStyle: map, ViewStyle: view };
+    }
+    Sumaho()
+    {
+        var title = {
+            position:"float",
+            height:"10%"
+        };
+        var h1 = {
+            margin:"0px",
+            padding:"0px",
             "text-align":"center"
+        };
+        var talk = {
+            width:"80%",
+            left:"10%",
+        };
+        var map = {
+            width:"80%",
+            left:"10%",
+            right:"10%"
+        };
+        var view = {
+            width:"100%",
+        };
+
+        return { titileStyle: title, style: h1,talkStyle:talk, mapStyle: map, ViewStyle: view };
+    }
+    Tab()
+    {
+        var title = {
+
+        };
+        var h1 = {
+
+        };
+        var talk = {
+
+        };
+        var map = {
+
+        };
+        var view = {
+
+        };
+
+        return { titileStyle: title, style: h1,talkStyle:talk, mapStyle: map, ViewStyle: view };
+    }
+    getStyle()
+    {
+        var {mode} = this.state;
+        if (mode == 'sp') {
+            return this.Sumaho();
         }
-        var talkStyle ={
-            position:"absolute",
-            top:"15%",
-            left:"70%",
-            width:"30%",
-            height:"80%",
-            background:"#f2f2f3",
-            color:"#000000"
+        else if(mode == 'tab')
+        {
+            return this.Tab();
         }
-        var mapStyle ={
-            position:"absolute",
-            top:"15%",
-            width:"65%",
-            height:"80%"
+        else{
+            return this.Other();
         }
-        var ViewStyle ={
-            height:"50%"
-        }
+    }
+    render() {
+        var {talk,imgURL,mode} = this.state;
+        var {titleStyle,style,talkStyle,mapStyle,ViewStyle} = this.getStyle();
+
         return (
             <div>
-                <header id="title" style={titileStyle}>
+                <header id="title" style={titleStyle}>
                     <h1 style={style}> TRPG　GM管理画面</h1>
                 </header>
+                <div id="map" style = {mapStyle} draggable={true}>
+                公開するマップ：<input type="file" onChange={this.onChange} /><br/>
+                <img src={imgURL} style={ViewStyle}/><br/>
+                <button onClick={this.SendMap}>マップ公開</button>
+                </div>
                 <div id="talk" style = {talkStyle}>
                     トーク履歴<br/>
                     <ul style={{"list-style-type": "none"}}>
                         {talk.map((res)=>{return (<li>{res}</li>)})}
                     </ul>
-                </div>
-                <div id="map" style = {mapStyle} draggable={true}>
-                公開するマップ：<input type="file" onChange={this.onChange} /><br/>
-                <img src={imgURL} style={ViewStyle}/><br/>
-                <button onClick={this.SendMap}>マップ公開</button>
                 </div>
             </div>
         )
