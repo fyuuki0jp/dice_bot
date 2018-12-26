@@ -244,7 +244,7 @@ class App extends React.Component {
                     </select>
                     <button onClick={this.ExecuteDice}>ダイスを振る</button><br/>
                     結果：{result}
-                    <input type="text" value={comment} onChange={this.Comment}/><button onClick={this.SendMessage}>コメント送信</button>
+                    <br/><input type="text" value={comment} onChange={this.Comment}/><button onClick={this.SendMessage}>コメント送信</button>
                 </div>
                 <div id="talk" style = {talkStyle}>
                     トーク履歴<br/>

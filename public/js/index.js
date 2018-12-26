@@ -245,7 +245,7 @@ class App extends React.Component {
                     ), 
                     React.createElement("button", {onClick: this.ExecuteDice}, "ダイスを振る"), React.createElement("br", null), 
                     "結果：", result, 
-                    React.createElement("input", {type: "text", value: comment, onChange: this.Comment}), React.createElement("button", {onClick: this.SendMessage}, "コメント送信")
+                    React.createElement("br", null), React.createElement("input", {type: "text", value: comment, onChange: this.Comment}), React.createElement("button", {onClick: this.SendMessage}, "コメント送信")
                 ), 
                 React.createElement("div", {id: "talk", style: talkStyle}, 
                     "トーク履歴", React.createElement("br", null), 
