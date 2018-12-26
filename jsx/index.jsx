@@ -233,7 +233,7 @@ class App extends React.Component {
     render() {
         var {talk,imgURL,dice,count,result,comment} = this.state;
         var {titleStyle,style,talkStyle,mapStyle,ViewStyle,diceStyle} = this.getStyle();
-        var view = talk;
+        var view = talk.concat();
         return (
             <div>
                 <header id="title" style={titleStyle}>
