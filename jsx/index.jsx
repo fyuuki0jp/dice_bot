@@ -228,7 +228,8 @@ class App extends React.Component {
         save.forEach((value)=>{
             s += value+'\n';
         })
-        var bolb = new Blob([s],{type:"text/plain"});
+        var bom = new Uint8Array([0xEF, 0xBB, 0xBF]);
+        var bolb = new Blob([bom,s],{type:"text/plain"});
 
         var a = document.createElement('a');
         a.download = "session.txt";
