@@ -36,6 +36,7 @@ class App extends React.Component {
         this.getStyle = this.getStyle.bind(this);
         this.DiceCount = this.DiceCount.bind(this);
         this.DiceSelect = this.DiceSelect.bind(this);
+        this.ExecuteDice = this.ExecuteDice.bind(this);
     }
     componentDidMount()
     {
@@ -224,7 +225,7 @@ class App extends React.Component {
                         React.createElement("option", {value: 20}, "20"), 
                         React.createElement("option", {value: 100}, "100")
                     ), 
-                    React.createElement("button", {onClick: this.ExecuteDice}, "ダイスを振る"), 
+                    React.createElement("button", {onClick: this.ExecuteDice}, "ダイスを振る"), React.createElement("br", null), 
                     "結果：", result
                 ), 
                 React.createElement("div", {id: "talk", style: talkStyle}, 

@@ -35,6 +35,7 @@ class App extends React.Component {
         this.getStyle = this.getStyle.bind(this);
         this.DiceCount = this.DiceCount.bind(this);
         this.DiceSelect = this.DiceSelect.bind(this);
+        this.ExecuteDice = this.ExecuteDice.bind(this);
     }
     componentDidMount()
     {
@@ -223,7 +224,7 @@ class App extends React.Component {
                         <option value={20}>20</option>
                         <option value={100}>100</option>
                     </select>
-                    <button onClick={this.ExecuteDice}>ダイスを振る</button>
+                    <button onClick={this.ExecuteDice}>ダイスを振る</button><br/>
                     結果：{result}
                 </div>
                 <div id="talk" style = {talkStyle}>
