@@ -26,6 +26,10 @@ class App extends React.Component {
         this.onChange = this.onChange.bind(this);
         this.SendMap = this.SendMap.bind(this);
         this.Debug = this.Debug.bind(this);
+        this.Sumaho = this.Sumaho.bind(this);
+        this.Tab = this.Tab.bind(this);
+        this.Other = this.Other.bind(this);
+        this.getStyle = this.getStyle.bind(this);
     }
     componentDidMount()
     {
