@@ -186,7 +186,7 @@ class App extends React.Component {
     ExecuteDice()
     {
         const {dice,count} = this.state;
-        var result;
+        var result='';
         var sum = 0;
         for(var i = 0;i<count;i++){
             var tmp = Math.floor(Math.random()*dice);
