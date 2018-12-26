@@ -102,7 +102,9 @@ class App extends React.Component {
     {
         var title = {
             position:"float",
-            height:"10%"
+            height:"10%",
+            background: "#01A9DB",
+            color: "#000000",
         };
         var h1 = {
             margin:"0px",
@@ -112,6 +114,8 @@ class App extends React.Component {
         var talk = {
             width:"80%",
             left:"10%",
+            background: "#f2f2f3",
+            color: "#000000"
         };
         var map = {
             width:"80%",
