@@ -180,7 +180,7 @@ class App extends React.Component {
                 <div id="talk" style = {talkStyle}>
                     トーク履歴<br/>
                     <ul style={{"list-style-type": "none",height:"100%",overflow:"auto"}}>
-                        {talk.map((res)=>{return (<li>{res}</li>)})}
+                        {talk.reverse().map((res)=>{return (<li>{res}</li>)})}
                     </ul>
                 </div>
             </div>

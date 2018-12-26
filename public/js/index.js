@@ -181,7 +181,7 @@ class App extends React.Component {
                 React.createElement("div", {id: "talk", style: talkStyle}, 
                     "トーク履歴", React.createElement("br", null), 
                     React.createElement("ul", {style: {"list-style-type": "none",height:"100%",overflow:"auto"}}, 
-                        talk.map((res)=>{return (React.createElement("li", null, res))})
+                        talk.reverse().map((res)=>{return (React.createElement("li", null, res))})
                     )
                 )
             )
