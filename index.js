@@ -71,7 +71,7 @@ async function echoman(ev) {
       ]
     )
   }
-  else if (command.match('開始') || command.match('スタート')) {
+  else if (command.match('スタート')) {
     buke_count = 0;
     io.emit("talk", "Bot：ブーケのカウントを開始します。");
     return client.replyMessage(ev.replyToken, {
@@ -83,7 +83,7 @@ async function echoman(ev) {
     buke_count += 1;
     return
   }
-  else if (command.match('ストップ') || command.match('終了')) {
+  else if (command.match('ストップ')) {
 
     io.emit("talk", "Bot：ブーケのカウントを終了します。\nブーケの個数は" + buke_count + 'でした。');
     return client.replyMessage(ev.replyToken, {
@@ -306,4 +306,12 @@ io.on("connection", (sock) => {
     writeStream.write(uploadData, 'binary');//バイナリでお願いする
     writeStream.end();
   });
+
+  sock.on("talk",(res)=>{
+    client.pushMessage(id,{
+      type:"text",
+      text:"GM->"+res
+    });
+    io.emit("talk","GM："+res);
+  })
 })

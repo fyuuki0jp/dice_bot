@@ -25,7 +25,8 @@ class App extends React.Component {
             mode:getDevice,
             dice:6,
             count:2,
-            result:""
+            result:"",
+            comment:""
         }
         this.onChange = this.onChange.bind(this);
         this.SendMap = this.SendMap.bind(this);
@@ -37,6 +38,8 @@ class App extends React.Component {
         this.DiceCount = this.DiceCount.bind(this);
         this.DiceSelect = this.DiceSelect.bind(this);
         this.ExecuteDice = this.ExecuteDice.bind(this);
+        this.Comment = this.Comment.bind(this);
+        this.SendMessage = this.SendMessage.bind(this);
     }
     componentDidMount()
     {
@@ -62,6 +65,15 @@ class App extends React.Component {
         }.bind(this);
 
         reader.readAsBinaryString(this.state.path);
+    }
+    Comment(e)
+    {
+        this.setState({comment:e.target.value});
+    }
+    SendMessage()
+    {
+        const {comment} = this.state;
+        socket.emit("talk",comment);
     }
     onChange(e)
     {
@@ -207,7 +219,7 @@ class App extends React.Component {
         this.setState({result:sum.toString()+'('+result+')'});
     }
     render() {
-        var {talk,imgURL,dice,count,result} = this.state;
+        var {talk,imgURL,dice,count,result,comment} = this.state;
         var {titleStyle,style,talkStyle,mapStyle,ViewStyle,diceStyle} = this.getStyle();
 
         return (
@@ -232,7 +244,8 @@ class App extends React.Component {
                         React.createElement("option", {value: 100}, "100")
                     ), 
                     React.createElement("button", {onClick: this.ExecuteDice}, "ダイスを振る"), React.createElement("br", null), 
-                    "結果：", result
+                    "結果：", result, 
+                    React.createElement("input", {type: "text", value: comment, onChange: this.Comment}), React.createElement("button", {onClick: this.SendMessage}, "コメント送信")
                 ), 
                 React.createElement("div", {id: "talk", style: talkStyle}, 
                     "トーク履歴", React.createElement("br", null), 
