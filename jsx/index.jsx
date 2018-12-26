@@ -13,6 +13,7 @@ var getDevice = (function(){
     }
 })();
 
+
 class App extends React.Component {
     constructor(props) {
         super(props);
@@ -20,7 +21,10 @@ class App extends React.Component {
             talk:[],
             imgURL:"",
             path:"",
-            mode:getDevice
+            mode:getDevice,
+            dice:6,
+            count:2,
+            result:""
         }
         this.onChange = this.onChange.bind(this);
         this.SendMap = this.SendMap.bind(this);
@@ -29,6 +33,8 @@ class App extends React.Component {
         this.Tab = this.Tab.bind(this);
         this.Other = this.Other.bind(this);
         this.getStyle = this.getStyle.bind(this);
+        this.DiceCount = this.DiceCount.bind(this);
+        this.DiceSelect = this.DiceSelect.bind(this);
     }
     componentDidMount()
     {
@@ -95,7 +101,7 @@ class App extends React.Component {
         var view = {
             height: "50%"
         }
-        return { titleStyle: title, style: h1,talkStyle:talk, mapStyle: map, ViewStyle: view };
+        return { titleStyle: title, style: h1,talkStyle:talk, mapStyle: map, ViewStyle: view ,diceStyle:dice};
     }
     Sumaho()
     {
@@ -124,8 +130,11 @@ class App extends React.Component {
         var view = {
             width:"100%",
         };
+        var dice = {
+            width:"100%"
+        }
 
-        return { titileStyle: title, style: h1,talkStyle:talk, mapStyle: map, ViewStyle: view };
+        return { titileStyle: title, style: h1,talkStyle:talk, mapStyle: map, ViewStyle: view ,diceStyle:dice};
     }
     Tab()
     {
@@ -152,7 +161,7 @@ class App extends React.Component {
 
         };
 
-        return { titileStyle: title, style: h1,talkStyle:talk, mapStyle: map, ViewStyle: view };
+        return { titileStyle: title, style: h1,talkStyle:talk, mapStyle: map, ViewStyle: view ,diceStyle:dice};
     }
     getStyle()
     {
@@ -164,9 +173,34 @@ class App extends React.Component {
             return this.Other();
         }
     }
+    DiceCount(e)
+    {
+        this.setState({count:e.target.value});
+    }
+    DiceSelect(e)
+    {
+        this.setState({dice:e.target.value});
+    }
+    ExecuteDice()
+    {
+        const {dice,count} = this.state;
+        var result;
+        var sum = 0;
+        for(var i = 0;i<count;i++){
+            var tmp = Math.floor(Math.random()*dice);
+            if(dice == 6 || dice == 8 || dice == 20 || dice == 4)
+            {
+                tmp = tmp+1;
+                sum += tmp;
+            }
+            if(i != 0)result+=',';
+            result += tmp.toString();
+        }
+        this.setState({result:sum.toString()+'('+result+')'});
+    }
     render() {
-        var {talk,imgURL,mode} = this.state;
-        var {titleStyle,style,talkStyle,mapStyle,ViewStyle} = this.getStyle();
+        var {talk,imgURL,dice,count,result} = this.state;
+        var {titleStyle,style,talkStyle,mapStyle,ViewStyle,diceStyle} = this.getStyle();
 
         return (
             <div>
@@ -177,7 +211,20 @@ class App extends React.Component {
                 公開するマップ：<input type="file" onChange={this.onChange} /><br/>
                 <img src={imgURL} style={ViewStyle}/><br/>
                 <button onClick={this.SendMap}>マップ公開</button><br/>
-                
+                </div>
+                <div id="dice" style = {diceStyle}>
+                    <input type="number" value={count} onChange={this.DiceCount} />
+                    D
+                    <select value={dice}onChange={this.DiceSelect}>
+                        <option value={4}>4</option>
+                        <option value={6}>6</option>
+                        <option value={8}>8</option>
+                        <option value={10}>10</option>
+                        <option value={20}>20</option>
+                        <option value={100}>100</option>
+                    </select>
+                    <button onClick={this.ExecuteDice}>ダイスを振る</button>
+                    結果：{result}
                 </div>
                 <div id="talk" style = {talkStyle}>
                     トーク履歴<br/>

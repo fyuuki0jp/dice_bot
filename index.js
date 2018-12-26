@@ -62,7 +62,7 @@ async function echoman(ev) {
         },
         {
           type: "text",
-          text: "GMは以下のURLにアクセスしてくださ。タブレット,PCでの閲覧を推奨します。"
+          text: "GMは以下のURLにアクセスしてください。ここでマップの公開などを行うことができます。"
         },
         {
           type: "text",

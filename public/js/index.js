@@ -14,6 +14,7 @@ var getDevice = (function(){
     }
 })();
 
+
 class App extends React.Component {
     constructor(props) {
         super(props);
@@ -21,7 +22,10 @@ class App extends React.Component {
             talk:[],
             imgURL:"",
             path:"",
-            mode:getDevice
+            mode:getDevice,
+            dice:6,
+            count:2,
+            result:""
         }
         this.onChange = this.onChange.bind(this);
         this.SendMap = this.SendMap.bind(this);
@@ -30,6 +34,8 @@ class App extends React.Component {
         this.Tab = this.Tab.bind(this);
         this.Other = this.Other.bind(this);
         this.getStyle = this.getStyle.bind(this);
+        this.DiceCount = this.DiceCount.bind(this);
+        this.DiceSelect = this.DiceSelect.bind(this);
     }
     componentDidMount()
     {
@@ -96,7 +102,7 @@ class App extends React.Component {
         var view = {
             height: "50%"
         }
-        return { titleStyle: title, style: h1,talkStyle:talk, mapStyle: map, ViewStyle: view };
+        return { titleStyle: title, style: h1,talkStyle:talk, mapStyle: map, ViewStyle: view ,diceStyle:dice};
     }
     Sumaho()
     {
@@ -125,8 +131,11 @@ class App extends React.Component {
         var view = {
             width:"100%",
         };
+        var dice = {
+            width:"100%"
+        }
 
-        return { titileStyle: title, style: h1,talkStyle:talk, mapStyle: map, ViewStyle: view };
+        return { titileStyle: title, style: h1,talkStyle:talk, mapStyle: map, ViewStyle: view ,diceStyle:dice};
     }
     Tab()
     {
@@ -153,7 +162,7 @@ class App extends React.Component {
 
         };
 
-        return { titileStyle: title, style: h1,talkStyle:talk, mapStyle: map, ViewStyle: view };
+        return { titileStyle: title, style: h1,talkStyle:talk, mapStyle: map, ViewStyle: view ,diceStyle:dice};
     }
     getStyle()
     {
@@ -165,9 +174,34 @@ class App extends React.Component {
             return this.Other();
         }
     }
+    DiceCount(e)
+    {
+        this.setState({count:e.target.value});
+    }
+    DiceSelect(e)
+    {
+        this.setState({dice:e.target.value});
+    }
+    ExecuteDice()
+    {
+        const {dice,count} = this.state;
+        var result;
+        var sum = 0;
+        for(var i = 0;i<count;i++){
+            var tmp = Math.floor(Math.random()*dice);
+            if(dice == 6 || dice == 8 || dice == 20 || dice == 4)
+            {
+                tmp = tmp+1;
+                sum += tmp;
+            }
+            if(i != 0)result+=',';
+            result += tmp.toString();
+        }
+        this.setState({result:sum.toString()+'('+result+')'});
+    }
     render() {
-        var {talk,imgURL,mode} = this.state;
-        var {titleStyle,style,talkStyle,mapStyle,ViewStyle} = this.getStyle();
+        var {talk,imgURL,dice,count,result} = this.state;
+        var {titleStyle,style,talkStyle,mapStyle,ViewStyle,diceStyle} = this.getStyle();
 
         return (
             React.createElement("div", null, 
@@ -178,7 +212,20 @@ class App extends React.Component {
                 "公開するマップ：", React.createElement("input", {type: "file", onChange: this.onChange}), React.createElement("br", null), 
                 React.createElement("img", {src: imgURL, style: ViewStyle}), React.createElement("br", null), 
                 React.createElement("button", {onClick: this.SendMap}, "マップ公開"), React.createElement("br", null)
-                
+                ), 
+                React.createElement("div", {id: "dice", style: diceStyle}, 
+                    React.createElement("input", {type: "number", value: count, onChange: this.DiceCount}), 
+                    "D", 
+                    React.createElement("select", {value: dice, onChange: this.DiceSelect}, 
+                        React.createElement("option", {value: 4}, "4"), 
+                        React.createElement("option", {value: 6}, "6"), 
+                        React.createElement("option", {value: 8}, "8"), 
+                        React.createElement("option", {value: 10}, "10"), 
+                        React.createElement("option", {value: 20}, "20"), 
+                        React.createElement("option", {value: 100}, "100")
+                    ), 
+                    React.createElement("button", {onClick: this.ExecuteDice}, "ダイスを振る"), 
+                    "結果：", result
                 ), 
                 React.createElement("div", {id: "talk", style: talkStyle}, 
                     "トーク履歴", React.createElement("br", null), 
