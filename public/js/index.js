@@ -18,7 +18,7 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            talk:["サンプル：ここにトーク履歴が記入されていきます。"],
+            talk:[],
             imgURL:"",
             path:"",
             mode:getDevice
@@ -120,6 +120,7 @@ class App extends React.Component {
         };
         var map = {
             width:"100%",
+            height:"40%"
         };
         var view = {
             width:"100%",
