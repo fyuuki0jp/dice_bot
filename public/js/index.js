@@ -114,15 +114,12 @@ class App extends React.Component {
             color: "#000000"
         };
         var talk = {
-            width:"80%",
-            left:"10%",
+            width:"100%",
             background: "#f2f2f3",
             color: "#000000"
         };
         var map = {
-            width:"80%",
-            left:"10%",
-            right:"10%"
+            width:"100%",
         };
         var view = {
             width:"100%",
@@ -133,10 +130,17 @@ class App extends React.Component {
     Tab()
     {
         var title = {
-
+            position:"float",
+            height:"10%",
+            background: "#01A9DB",
+            color: "#000000"
         };
         var h1 = {
-
+            margin:"0px",
+            padding:"0px",
+            "text-align":"center",
+            background: "#01A9DB",
+            color: "#000000"
         };
         var talk = {
 
@@ -155,10 +159,6 @@ class App extends React.Component {
         var {mode} = this.state;
         if (mode == 'sp') {
             return this.Sumaho();
-        }
-        else if(mode == 'tab')
-        {
-            return this.Tab();
         }
         else{
             return this.Other();
