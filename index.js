@@ -91,6 +91,18 @@ async function echoman(ev) {
       text: `ブーケのカウントを終了します。\nブーケの個数は` + buke_count + 'でした。'
     })
   }
+  else if(command.match('D66'))
+  {
+    let dice = 6;
+    var D60 = Math.floor(Math.random() * dice) + 1;
+    var D61 = Math.floor(Math.random() * dice) + 1;
+
+    return client.replyMessage(ev.replyToken, {
+      type: "text",
+      text: 'result:' + D60.toString() + D61.toString()
+    })
+
+  }
   else if (command.match('[0-9]{1,2}D6')) {
     var index = command.indexOf('D');
     var count = command.substring(0, index);
@@ -267,6 +279,9 @@ async function echoman(ev) {
       type: "text",
       text: 'result:' + sum + '(' + result + ')'
     })
+  }
+  else if(command.match('D66')) {
+
   }
   else {
     console.log("no adaptive text : " + command);
