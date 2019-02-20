@@ -154,6 +154,7 @@ async function echoman(ev) {
     var count = command.substring(0, index);
 
     let dice = 10;
+    var sum = 0;
     var D10 = Math.floor(Math.random() * dice) + 1;
     var ret = '';
     for (i = 0; i < count; i++) {
