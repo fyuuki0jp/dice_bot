@@ -98,7 +98,7 @@ async function echoman(ev) {
     console.log("name : "+name);
 
     var player = {
-      'NAME':name,
+      'name':name,
       'STR':STR,
       'CON':CON,
       'POW':POW,
