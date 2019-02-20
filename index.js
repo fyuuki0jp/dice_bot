@@ -71,6 +71,24 @@ async function echoman(ev) {
       ]
     )
   }
+  else if(command.match('クトゥルフ'))
+  {
+    var STR = Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + 3;
+    var CON = Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + 3;
+    var POW = Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + 3;
+    var DEX = Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + 3;
+    var APP = Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + 3;
+    var SIZ = Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + 9;
+    var INT = Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + 9;
+    var EDU = Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + 6;
+    var name;
+    return client.replyMessage(ev.replyToken, {
+      type: "text",
+      text: 'キャラを作成します。\nSTR : '+STR+'\nCON : '+CON+'\nPOW : '+POW+'\nDEX : '+DEX+'\nAPP : '+APP+'\nSIZ : '
+      +SIZ+'\nINT : '+INT+'\nEDU : '+EDU+'\n\nSAN : '+POW*5+'\n幸運 : '+POW*5+'\nアイデア : '+INT*5+'\n知識 : '+EDU*5+'\n耐久力 : '+(CON+SIZ)/2+'\nマジックポイント : '+POW+'\n職業技能ポイント : '+EDU*20
+      +'\n趣味技能ポイント : '+INT*10+'\nダメージボーナス : '
+    })
+  }
   else if (command.match('スタート')) {
     buke_count = 0;
     io.emit("talk", "Bot：ブーケのカウントを開始します。");
