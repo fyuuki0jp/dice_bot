@@ -71,7 +71,7 @@ async function echoman(ev) {
       ]
     )
   }
-  else if(command.match('クトゥルフ振り直し /^[A-Z]{3}'))
+  else if(command.match('クトゥルフ振り直し'))
   {
     var index = command.indexOf('クトゥルフ')
     var redice = command.slice(-3);
