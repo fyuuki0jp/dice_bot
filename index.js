@@ -73,6 +73,13 @@ async function echoman(ev) {
   }
   else if(command.match('クトゥルフ'))
   {
+    var db = STR+SIZ;
+    var D = '-';
+    if(db <= 12)D='-1D6';
+    else if(db <= 16)D='-1D4';
+    else if(db <= 24)D='0';
+    else if(db <= 32)D='+1D4';
+    else if(db <= 36)D='+1D6';
     var STR = Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + 3;
     var CON = Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + 3;
     var POW = Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + 3;
@@ -81,19 +88,36 @@ async function echoman(ev) {
     var SIZ = Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + 9;
     var INT = Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + 9;
     var EDU = Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + 6;
-    var db = STR+SIZ;
-    var DB = '-';
-    if(db <= 12)DB='-1D6';
-    else if(db <= 16)DB='-1D4';
-    else if(db <= 24)DB='0';
-    else if(db <= 32)DB='+1D4';
-    else if(db <= 36)DB='+1D6';
+
+    var player = {
+      'STR':STR,
+      'CON':CON,
+      'POW':POW,
+      'DEX':DEX,
+      'APP':APP,
+      'SIZ':SIZ,
+      'INT':INT,
+      'EDU':EDU,
+      'DB':D,
+      'SAN':POW*5,
+      'idea':INT*5,
+      'know':EDU*5,
+      'HP':Math.floor((CON+SIZ)/2+0.5),
+      'MP':POW,
+      'JP':EDU*20,
+      'AP':INT*10
+    };
+    
     return client.replyMessage(ev.replyToken, {
       type: "text",
-      text: 'キャラを作成します。\nSTR : '+STR+'\nCON : '+CON+'\nPOW : '+POW+'\nDEX : '+DEX+'\nAPP : '+APP+'\nSIZ : '
-      +SIZ+'\nINT : '+INT+'\nEDU : '+EDU+'\n\nSAN : '+POW*5+'\n幸運 : '+POW*5+'\nアイデア : '+INT*5+'\n知識 : '+EDU*5+'\n耐久力 : '+Math.floor((CON+SIZ)/2)+'\nマジックポイント : '+POW+'\n職業技能ポイント : '+EDU*20
-      +'\n趣味技能ポイント : '+INT*10+'\nダメージボーナス : '+DB
+      text: 'キャラを作成します。\nSTR : '+player.STR+'\nCON : '+player.CON+'\nPOW : '+player.POW+'\nDEX : '+player.DEX+'\nAPP : '+player.APP+'\nSIZ : '
+      +player.SIZ+'\nINT : '+player.INT+'\nEDU : '+player.EDU+'\n\nSAN : '+player.SAN+'\n幸運 : '+player.SAN+'\nアイデア : '+player.idea+'\n知識 : '+player.know+'\n耐久力 : '+player.HP+'\nマジックポイント : '+player.MP+'\n職業技能ポイント : '+player.JP
+      +'\n趣味技能ポイント : '+player.AP+'\nダメージボーナス : '+player.DB
     })
+  }
+  else if(command.match('クトゥルフ　振り直し /^[A-Z]{3} '))
+  {
+
   }
   else if (command.match('スタート')) {
     buke_count = 0;
