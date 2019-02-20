@@ -149,10 +149,7 @@ async function echoman(ev) {
     })
   }
   else if(command.match('D10'))
-  {
-    let dice = 10;
-    var ret = '';
-    
+  { 
     let dice = 10;
     var D10 = Math.floor(Math.random() * dice) + 1;
     
