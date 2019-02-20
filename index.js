@@ -103,6 +103,28 @@ async function echoman(ev) {
     })
 
   }
+  else if(command.match('[0-9]{1,2}D66'))
+  {
+    let dice = 6;
+    var ret = "(";
+    var index = command.indexOf('D');
+    var count = command.substring(0, index);
+    for(i = 0;i<count;i++)
+    {
+      if(i != 0)
+      {
+        ret += ',';
+      }
+      var D60 = Math.floor(Math.random() * dice) + 1;
+      var D61 = Math.floor(Math.random() * dice) + 1;
+      ret += D60.toString() + D61.toString();
+    }
+    ret += ')';
+    return client.replyMessage(ev.replyToken, {
+      type: "text",
+      text: 'result:' + ret
+    })
+  }
   else if (command.match('[0-9]{1,2}D6')) {
     var index = command.indexOf('D');
     var count = command.substring(0, index);
@@ -125,6 +147,38 @@ async function echoman(ev) {
       type: "text",
       text: 'result:' + sum + '(' + resultA + ')'
     })
+  }
+  else if(command.match('D10'))
+  {
+    let dice = 10;
+    var ret = '';
+    for (i = 0; i < count; i++) {
+      tmp = Math.floor(Math.random() * dice) + 1;
+      if (i != 0) {
+        ret += ',';
+      }
+      ret += tmp.toString();
+      sum += tmp;
+    }
+    return client.replyMessage(ev.replyToken, {
+      type: "text",
+      text: 'result:' + sum + '('+ret+')'
+    })
+  }
+  else if(command.match('[0-9]{1,2}D10'))
+  {
+    var index = command.indexOf('D');
+    var count = command.substring(0, index);
+
+    let dice = 10;
+    var D10 = Math.floor(Math.random() * dice) + 1;
+    var ret = '(';
+
+    return client.replyMessage(ev.replyToken, {
+      type: "text",
+      text: 'result:' + D10.toString()
+    })
+
   }
   else if (command.match('[0-9]{1,2}D10 c[0-9]')) {
     var index = command.indexOf('D');
@@ -279,9 +333,6 @@ async function echoman(ev) {
       type: "text",
       text: 'result:' + sum + '(' + result + ')'
     })
-  }
-  else if(command.match('D66')) {
-
   }
   else {
     console.log("no adaptive text : " + command);
