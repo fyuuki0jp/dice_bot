@@ -92,8 +92,10 @@ async function echoman(ev) {
     var name = '';
 
     var index = command.indexOf('クトゥルフ')
-
-    name = command.substring(0,index);
+    console.log(command);
+    console.log("index : "+index);
+    name = command.substring(0,index); 
+    console.log("name : "+name);
 
     var player = {
       'NAME':name,
@@ -117,7 +119,7 @@ async function echoman(ev) {
     players.push(player);
     return client.replyMessage(ev.replyToken, {
       type: "text",
-      text: 'キャラを作成します。プレイヤーネーム : '+player.name+'\nSTR : '+player.STR+'\nCON : '+player.CON+'\nPOW : '+player.POW+'\nDEX : '+player.DEX+'\nAPP : '+player.APP+'\nSIZ : '
+      text: 'キャラを作成します。\nプレイヤーネーム : '+player.name+'\nSTR : '+player.STR+'\nCON : '+player.CON+'\nPOW : '+player.POW+'\nDEX : '+player.DEX+'\nAPP : '+player.APP+'\nSIZ : '
       +player.SIZ+'\nINT : '+player.INT+'\nEDU : '+player.EDU+'\n\nSAN : '+player.SAN+'\n幸運 : '+player.SAN+'\nアイデア : '+player.idea+'\n知識 : '+player.know+'\n耐久力 : '+player.HP+'\nマジックポイント : '+player.MP+'\n職業技能ポイント : '+player.JP
       +'\n趣味技能ポイント : '+player.AP+'\nダメージボーナス : '+player.DB
     })
