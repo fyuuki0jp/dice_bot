@@ -71,59 +71,6 @@ async function echoman(ev) {
       ]
     )
   }
-  else if(command.match('クトゥルフ'))
-  {
-    var db = STR+SIZ;
-    var D = '-';
-    if(db <= 12)D='-1D6';
-    else if(db <= 16)D='-1D4';
-    else if(db <= 24)D='0';
-    else if(db <= 32)D='+1D4';
-    else if(db <= 36)D='+1D6';
-    var STR = Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + 3;
-    var CON = Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + 3;
-    var POW = Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + 3;
-    var DEX = Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + 3;
-    var APP = Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + 3;
-    var SIZ = Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + 9;
-    var INT = Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + 9;
-    var EDU = Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + 6;
-
-    var name = '';
-
-    var index = command.indexOf('クトゥルフ')
-    console.log(command);
-    console.log("index : "+index);
-    name = command.substring(0,index); 
-    console.log("name : "+name);
-
-    var player = {
-      'name':name,
-      'STR':STR,
-      'CON':CON,
-      'POW':POW,
-      'DEX':DEX,
-      'APP':APP,
-      'SIZ':SIZ,
-      'INT':INT,
-      'EDU':EDU,
-      'DB':D,
-      'SAN':POW*5,
-      'idea':INT*5,
-      'know':EDU*5,
-      'HP':Math.floor((CON+SIZ)/2+0.5),
-      'MP':POW,
-      'JP':EDU*20,
-      'AP':INT*10
-    };
-    players.push(player);
-    return client.replyMessage(ev.replyToken, {
-      type: "text",
-      text: 'キャラを作成します。\nプレイヤーネーム : '+player.name+'\nSTR : '+player.STR+'\nCON : '+player.CON+'\nPOW : '+player.POW+'\nDEX : '+player.DEX+'\nAPP : '+player.APP+'\nSIZ : '
-      +player.SIZ+'\nINT : '+player.INT+'\nEDU : '+player.EDU+'\n\nSAN : '+player.SAN+'\n幸運 : '+player.SAN+'\nアイデア : '+player.idea+'\n知識 : '+player.know+'\n耐久力 : '+player.HP+'\nマジックポイント : '+player.MP+'\n職業技能ポイント : '+player.JP
-      +'\n趣味技能ポイント : '+player.AP+'\nダメージボーナス : '+player.DB
-    })
-  }
   else if(command.match('クトゥルフ振り直し /^[A-Z]{3}'))
   {
     var index = command.indexOf('クトゥルフ')
@@ -183,9 +130,62 @@ async function echoman(ev) {
 
     return client.replyMessage(ev.replyToken, {
       type: "text",
-      text: 'キャラを作成します。プレイヤーネーム : '+target.name+'\nSTR : '+target.STR+'\nCON : '+target.CON+'\nPOW : '+target.POW+'\nDEX : '+target.DEX+'\nAPP : '+target.APP+'\nSIZ : '
+      text: 'ダイスを振り直します。プレイヤーネーム : '+target.name+'\nSTR : '+target.STR+'\nCON : '+target.CON+'\nPOW : '+target.POW+'\nDEX : '+target.DEX+'\nAPP : '+target.APP+'\nSIZ : '
       +target.SIZ+'\nINT : '+target.INT+'\nEDU : '+target.EDU+'\n\nSAN : '+target.SAN+'\n幸運 : '+target.SAN+'\nアイデア : '+target.idea+'\n知識 : '+target.know+'\n耐久力 : '+target.HP+'\nマジックポイント : '+target.MP+'\n職業技能ポイント : '+target.JP
       +'\n趣味技能ポイント : '+target.AP+'\nダメージボーナス : '+target.DB
+    })
+  }
+  else if(command.match('クトゥルフ'))
+  {
+    var db = STR+SIZ;
+    var D = '-';
+    if(db <= 12)D='-1D6';
+    else if(db <= 16)D='-1D4';
+    else if(db <= 24)D='0';
+    else if(db <= 32)D='+1D4';
+    else if(db <= 36)D='+1D6';
+    var STR = Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + 3;
+    var CON = Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + 3;
+    var POW = Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + 3;
+    var DEX = Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + 3;
+    var APP = Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + 3;
+    var SIZ = Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + 9;
+    var INT = Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + 9;
+    var EDU = Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + 6;
+
+    var name = '';
+
+    var index = command.indexOf('クトゥルフ')
+    console.log(command);
+    console.log("index : "+index);
+    name = command.substring(0,index); 
+    console.log("name : "+name);
+
+    var player = {
+      'name':name,
+      'STR':STR,
+      'CON':CON,
+      'POW':POW,
+      'DEX':DEX,
+      'APP':APP,
+      'SIZ':SIZ,
+      'INT':INT,
+      'EDU':EDU,
+      'DB':D,
+      'SAN':POW*5,
+      'idea':INT*5,
+      'know':EDU*5,
+      'HP':Math.floor((CON+SIZ)/2+0.5),
+      'MP':POW,
+      'JP':EDU*20,
+      'AP':INT*10
+    };
+    players.push(player);
+    return client.replyMessage(ev.replyToken, {
+      type: "text",
+      text: 'キャラを作成します。\nプレイヤーネーム : '+player.name+'\nSTR : '+player.STR+'\nCON : '+player.CON+'\nPOW : '+player.POW+'\nDEX : '+player.DEX+'\nAPP : '+player.APP+'\nSIZ : '
+      +player.SIZ+'\nINT : '+player.INT+'\nEDU : '+player.EDU+'\n\nSAN : '+player.SAN+'\n幸運 : '+player.SAN+'\nアイデア : '+player.idea+'\n知識 : '+player.know+'\n耐久力 : '+player.HP+'\nマジックポイント : '+player.MP+'\n職業技能ポイント : '+player.JP
+      +'\n趣味技能ポイント : '+player.AP+'\nダメージボーナス : '+player.DB
     })
   }
   else if (command.match('スタート')) {
