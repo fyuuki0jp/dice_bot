@@ -81,12 +81,18 @@ async function echoman(ev) {
     var SIZ = Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + 9;
     var INT = Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + 9;
     var EDU = Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + 6;
-    var name;
+    var db = STR+SIZ;
+    var DB = '-';
+    if(db <= 12)DB='-1D6';
+    else if(db <= 16)DB='-1D4';
+    else if(db <= 24)DB='0';
+    else if(db <= 32)DB='+1D4';
+    else if(db <= 36)DB='+1D6';
     return client.replyMessage(ev.replyToken, {
       type: "text",
       text: 'キャラを作成します。\nSTR : '+STR+'\nCON : '+CON+'\nPOW : '+POW+'\nDEX : '+DEX+'\nAPP : '+APP+'\nSIZ : '
       +SIZ+'\nINT : '+INT+'\nEDU : '+EDU+'\n\nSAN : '+POW*5+'\n幸運 : '+POW*5+'\nアイデア : '+INT*5+'\n知識 : '+EDU*5+'\n耐久力 : '+(CON+SIZ)/2+'\nマジックポイント : '+POW+'\n職業技能ポイント : '+EDU*20
-      +'\n趣味技能ポイント : '+INT*10+'\nダメージボーナス : '
+      +'\n趣味技能ポイント : '+INT*10+'\nダメージボーナス : '+DB
     })
   }
   else if (command.match('スタート')) {
