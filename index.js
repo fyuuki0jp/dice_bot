@@ -11,7 +11,7 @@ const config = {
 };
 
 const client = new line.Client(config); // 追加
-
+var players = [];
 var server = express()
   .use(express.static(path.join(__dirname, "public")))
   .set("views", path.join(__dirname, "views"))
@@ -89,7 +89,14 @@ async function echoman(ev) {
     var INT = Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + 9;
     var EDU = Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + 6;
 
+    var name = '';
+
+    var index = command.indexOf('クトゥルフ')
+
+    name = command.substring(0,index);
+
     var player = {
+      'NAME':name,
       'STR':STR,
       'CON':CON,
       'POW':POW,
@@ -107,17 +114,77 @@ async function echoman(ev) {
       'JP':EDU*20,
       'AP':INT*10
     };
-    
+    players.push(player);
     return client.replyMessage(ev.replyToken, {
       type: "text",
-      text: 'キャラを作成します。\nSTR : '+player.STR+'\nCON : '+player.CON+'\nPOW : '+player.POW+'\nDEX : '+player.DEX+'\nAPP : '+player.APP+'\nSIZ : '
+      text: 'キャラを作成します。プレイヤーネーム : '+player.name+'\nSTR : '+player.STR+'\nCON : '+player.CON+'\nPOW : '+player.POW+'\nDEX : '+player.DEX+'\nAPP : '+player.APP+'\nSIZ : '
       +player.SIZ+'\nINT : '+player.INT+'\nEDU : '+player.EDU+'\n\nSAN : '+player.SAN+'\n幸運 : '+player.SAN+'\nアイデア : '+player.idea+'\n知識 : '+player.know+'\n耐久力 : '+player.HP+'\nマジックポイント : '+player.MP+'\n職業技能ポイント : '+player.JP
       +'\n趣味技能ポイント : '+player.AP+'\nダメージボーナス : '+player.DB
     })
   }
-  else if(command.match('クトゥルフ　振り直し /^[A-Z]{3} '))
+  else if(command.match('クトゥルフ　振り直し /^[A-Z]{3}'))
   {
+    var index = command.indexOf('クトゥルフ')
+    var redice = command.slice(-3);
+    name = command.substring(0,index);
 
+    var target = players.find((player) => {
+      return (player.name === name);
+    });
+
+    players.filter((value)=>{
+      return value.name !== name
+    })
+
+    if(redice == 'STR')
+    {
+      target.STR = Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + 3;
+    }
+    else if(redice == 'DEX')
+    {
+      target.DEX = Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + 3;
+    }
+    else if(redice == 'APP')
+    {
+      target.APP = Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + 3;
+    }
+    else if(redice == 'POW')
+    {
+      target.POW = Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + 3;
+      target.SAN = target.POW*5;
+      target.MP = target.POW;
+    }
+    else if(redice == 'CON')
+    {
+      target.CON = Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + 3;
+      target.HP = Math.floor((target.CON+target.SIZ)/2+0.5)
+    }
+    else if(redice == 'SIZ')
+    {
+      target.SIZ = Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + 9;
+      target.HP = Math.floor((target.CON+target.SIZ)/2+0.5)
+    }    
+    else if(redice == 'INT')
+    {
+      target.INT = Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + 9;
+      target.AP = target.INT*10;
+      target.idea = target.INT*5;
+    }
+    else if(redice == 'EDU')
+    {
+      target.EDU = Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + 9;
+      target.JP = target.EDU*20;
+      target.know = target.EDU*5;
+    }
+
+    players.push(target);
+
+    return client.replyMessage(ev.replyToken, {
+      type: "text",
+      text: 'キャラを作成します。プレイヤーネーム : '+target.name+'\nSTR : '+target.STR+'\nCON : '+target.CON+'\nPOW : '+target.POW+'\nDEX : '+target.DEX+'\nAPP : '+target.APP+'\nSIZ : '
+      +target.SIZ+'\nINT : '+target.INT+'\nEDU : '+target.EDU+'\n\nSAN : '+target.SAN+'\n幸運 : '+target.SAN+'\nアイデア : '+target.idea+'\n知識 : '+target.know+'\n耐久力 : '+target.HP+'\nマジックポイント : '+target.MP+'\n職業技能ポイント : '+target.JP
+      +'\n趣味技能ポイント : '+target.AP+'\nダメージボーナス : '+target.DB
+    })
   }
   else if (command.match('スタート')) {
     buke_count = 0;
