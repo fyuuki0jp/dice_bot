@@ -124,7 +124,7 @@ async function echoman(ev) {
       +'\n趣味技能ポイント : '+player.AP+'\nダメージボーナス : '+player.DB
     })
   }
-  else if(command.match('クトゥルフ　振り直し /^[A-Z]{3}'))
+  else if(command.match('クトゥルフ振り直し /^[A-Z]{3}'))
   {
     var index = command.indexOf('クトゥルフ')
     var redice = command.slice(-3);
@@ -137,7 +137,7 @@ async function echoman(ev) {
     players.filter((value)=>{
       return value.name !== name
     })
-
+    console.log('redice : '+redice)
     if(redice == 'STR')
     {
       target.STR = Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + 3;
