@@ -71,6 +71,22 @@ async function echoman(ev) {
       ]
     )
   }
+  else if(command.match('クトゥルフ表示'))
+  {
+    var index = command.indexOf('クトゥルフ')
+    name = command.substring(0,index);
+
+    var target = players.find((player) => {
+      return (player.name === name);
+    });
+
+    return client.replyMessage(ev.replyToken, {
+      type: "text",
+      text: 'ダイスを振り直します。\nプレイヤーネーム : '+target.name+'\nSTR : '+target.STR+'\nCON : '+target.CON+'\nPOW : '+target.POW+'\nDEX : '+target.DEX+'\nAPP : '+target.APP+'\nSIZ : '
+      +target.SIZ+'\nINT : '+target.INT+'\nEDU : '+target.EDU+'\n\nSAN : '+target.SAN+'\n幸運 : '+target.SAN+'\nアイデア : '+target.idea+'\n知識 : '+target.know+'\n耐久力 : '+target.HP+'\nマジックポイント : '+target.MP+'\n職業技能ポイント : '+target.JP
+      +'\n趣味技能ポイント : '+target.AP+'\nダメージボーナス : '+target.DB
+    })
+  }
   else if(command.match('クトゥルフ振り直し'))
   {
     var index = command.indexOf('クトゥルフ')
