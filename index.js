@@ -101,6 +101,7 @@ async function echoman(ev) {
       return value.name !== name
     })
     console.log('redice : '+redice)
+    target.retry += 1;
     if(redice == 'STR')
     {
       target.STR = Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + 3;
@@ -146,7 +147,7 @@ async function echoman(ev) {
 
     return client.replyMessage(ev.replyToken, {
       type: "text",
-      text: 'ダイスを振り直します。\nプレイヤーネーム : '+target.name+'\nSTR : '+target.STR+'\nCON : '+target.CON+'\nPOW : '+target.POW+'\nDEX : '+target.DEX+'\nAPP : '+target.APP+'\nSIZ : '
+      text: 'ダイスを振り直します。'+target.retry+'回目\nプレイヤーネーム : '+target.name+'\nSTR : '+target.STR+'\nCON : '+target.CON+'\nPOW : '+target.POW+'\nDEX : '+target.DEX+'\nAPP : '+target.APP+'\nSIZ : '
       +target.SIZ+'\nINT : '+target.INT+'\nEDU : '+target.EDU+'\n\nSAN : '+target.SAN+'\n幸運 : '+target.SAN+'\nアイデア : '+target.idea+'\n知識 : '+target.know+'\n耐久力 : '+target.HP+'\nマジックポイント : '+target.MP+'\n職業技能ポイント : '+target.JP
       +'\n趣味技能ポイント : '+target.AP+'\nダメージボーナス : '+target.DB
     })
@@ -194,7 +195,8 @@ async function echoman(ev) {
       'HP':Math.floor((CON+SIZ)/2+0.5),
       'MP':POW,
       'JP':EDU*20,
-      'AP':INT*10
+      'AP':INT*10,
+      'retry':0
     };
     players.push(player);
     return client.replyMessage(ev.replyToken, {
