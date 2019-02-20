@@ -91,18 +91,6 @@ async function echoman(ev) {
       text: `ブーケのカウントを終了します。\nブーケの個数は` + buke_count + 'でした。'
     })
   }
-  else if(command.match('D66'))
-  {
-    let dice = 6;
-    var D60 = Math.floor(Math.random() * dice) + 1;
-    var D61 = Math.floor(Math.random() * dice) + 1;
-
-    return client.replyMessage(ev.replyToken, {
-      type: "text",
-      text: 'result:' + D60.toString() + D61.toString()
-    })
-
-  }
   else if(command.match('[0-9]{1,2}D66'))
   {
     let dice = 6;
@@ -125,6 +113,18 @@ async function echoman(ev) {
       text: 'result:' + ret
     })
   }
+  else if(command.match('D66'))
+  {
+    let dice = 6;
+    var D60 = Math.floor(Math.random() * dice) + 1;
+    var D61 = Math.floor(Math.random() * dice) + 1;
+
+    return client.replyMessage(ev.replyToken, {
+      type: "text",
+      text: 'result:' + D60.toString() + D61.toString()
+    })
+
+  }
   else if (command.match('[0-9]{1,2}D6')) {
     var index = command.indexOf('D');
     var count = command.substring(0, index);
@@ -146,16 +146,6 @@ async function echoman(ev) {
     return client.replyMessage(ev.replyToken, {
       type: "text",
       text: 'result:' + sum + '(' + resultA + ')'
-    })
-  }
-  else if(command.match('D10'))
-  { 
-    let dice = 10;
-    var D10 = Math.floor(Math.random() * dice) + 1;
-    
-    return client.replyMessage(ev.replyToken, {
-      type: "text",
-      text: 'result:' + D10.toString()
     })
   }
   else if(command.match('[0-9]{1,2}D10'))
@@ -225,6 +215,16 @@ async function echoman(ev) {
       text: 'result:' + sum
     })
   }
+  else if(command.match('D10'))
+  { 
+    let dice = 10;
+    var D10 = Math.floor(Math.random() * dice) + 1;
+    
+    return client.replyMessage(ev.replyToken, {
+      type: "text",
+      text: 'result:' + D10.toString()
+    })
+  }
   else if (command.match('[0-9]{1,2}D100')) {
     var index = command.indexOf('D');
     var count = command.substring(0, index);
@@ -274,6 +274,15 @@ async function echoman(ev) {
       text: 'result:' + sum + '(' + result + ')'
     })
   }
+  else if(command.match('D4'))
+  {
+    var dice = 4;
+    var d4 = Math.floor(Math.random() * dice) + 1;
+    return client.replyMessage(ev.replyToken, {
+      type: "text",
+      text: 'result:' + d4.toString()
+    })
+  }
   else if (command.match('[0-9]{1,2}D12')) {
     var index = command.indexOf('D');
     var count = command.substring(0, index);
@@ -292,6 +301,15 @@ async function echoman(ev) {
     return client.replyMessage(ev.replyToken, {
       type: "text",
       text: 'result:' + sum + '(' + result + ')'
+    })
+  }
+  else if(command.match('D12'))
+  {
+    let dice = 12;
+    var D12 = Math.floor(Math.random() * dice) + 1;
+    return client.replyMessage(ev.replyToken, {
+      type: "text",
+      text: 'result:' + D12.toString()
     })
   }
   else if (command.match('[0-9]{1,2}D8')) {
@@ -314,6 +332,15 @@ async function echoman(ev) {
       text: 'result:' + sum + '(' + result + ')'
     })
   }
+  else if(command.match('D8'))
+  {
+    let dice = 8;
+    var D8 = Math.floor(Math.random() * dice) + 1;
+    return client.replyMessage(ev.replyToken, {
+      type: "text",
+      text: 'result:' + D8.toString()
+    })
+  }
   else if (command.match('[0-9]{1,2}D20')) {
     var index = command.indexOf('D');
     var count = command.substring(0, index);
@@ -332,6 +359,15 @@ async function echoman(ev) {
     return client.replyMessage(ev.replyToken, {
       type: "text",
       text: 'result:' + sum + '(' + result + ')'
+    })
+  }
+  else if(command.match('D20'))
+  {
+    let dice = 8;
+    var D20 = Math.floor(Math.random() * dice) + 1;
+    return client.replyMessage(ev.replyToken, {
+      type: "text",
+      text: 'result:' + D20.toString()
     })
   }
   else {
