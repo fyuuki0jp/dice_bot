@@ -91,7 +91,7 @@ async function echoman(ev) {
     return client.replyMessage(ev.replyToken, {
       type: "text",
       text: 'キャラを作成します。\nSTR : '+STR+'\nCON : '+CON+'\nPOW : '+POW+'\nDEX : '+DEX+'\nAPP : '+APP+'\nSIZ : '
-      +SIZ+'\nINT : '+INT+'\nEDU : '+EDU+'\n\nSAN : '+POW*5+'\n幸運 : '+POW*5+'\nアイデア : '+INT*5+'\n知識 : '+EDU*5+'\n耐久力 : '+(CON+SIZ)/2+'\nマジックポイント : '+POW+'\n職業技能ポイント : '+EDU*20
+      +SIZ+'\nINT : '+INT+'\nEDU : '+EDU+'\n\nSAN : '+POW*5+'\n幸運 : '+POW*5+'\nアイデア : '+INT*5+'\n知識 : '+EDU*5+'\n耐久力 : '+Math.floor((CON+SIZ)/2)+'\nマジックポイント : '+POW+'\n職業技能ポイント : '+EDU*20
       +'\n趣味技能ポイント : '+INT*10+'\nダメージボーナス : '+DB
     })
   }
