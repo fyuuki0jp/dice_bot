@@ -152,6 +152,23 @@ async function echoman(ev) {
   {
     let dice = 10;
     var ret = '';
+    
+    let dice = 10;
+    var D10 = Math.floor(Math.random() * dice) + 1;
+    
+    return client.replyMessage(ev.replyToken, {
+      type: "text",
+      text: 'result:' + D10.toString()
+    })
+  }
+  else if(command.match('[0-9]{1,2}D10'))
+  {
+    var index = command.indexOf('D');
+    var count = command.substring(0, index);
+
+    let dice = 10;
+    var D10 = Math.floor(Math.random() * dice) + 1;
+    var ret = '';
     for (i = 0; i < count; i++) {
       tmp = Math.floor(Math.random() * dice) + 1;
       if (i != 0) {
@@ -163,20 +180,6 @@ async function echoman(ev) {
     return client.replyMessage(ev.replyToken, {
       type: "text",
       text: 'result:' + sum + '('+ret+')'
-    })
-  }
-  else if(command.match('[0-9]{1,2}D10'))
-  {
-    var index = command.indexOf('D');
-    var count = command.substring(0, index);
-
-    let dice = 10;
-    var D10 = Math.floor(Math.random() * dice) + 1;
-    var ret = '(';
-
-    return client.replyMessage(ev.replyToken, {
-      type: "text",
-      text: 'result:' + D10.toString()
     })
 
   }
