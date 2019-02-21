@@ -208,7 +208,7 @@ class App extends React.Component {
         var sum = 0;
         for(var i = 0;i<count;i++){
             var tmp = Math.floor(Math.random()*dice);
-            if(dice == 6 || dice == 8 || dice == 20 || dice == 4)
+            if(dice == 6 || dice == 8 || dice == 20 || dice == 4 || dice == 12)
             {
                 tmp = tmp+1;
                 sum += tmp;
@@ -258,6 +258,7 @@ class App extends React.Component {
                         <option value={6}>6</option>
                         <option value={8}>8</option>
                         <option value={10}>10</option>
+                        <option value={12}>12</option>
                         <option value={20}>20</option>
                         <option value={100}>100</option>
                     </select>
