@@ -39,7 +39,9 @@ function Bot(req, res) {
   console.log("event fire");
   for (let i = 0, l = events.length; i < l; i++) {
     const ev = events[i];
-    echoman(ev)
+    if(ev.message.type=='text'){
+      echoman(ev)
+    }
   }
   console.log("all event complete");
 }
@@ -55,6 +57,9 @@ async function echoman(ev) {
   var command = ev.message.text;
   const userpro = await client.getProfile(ev.source.userId);
   var user = userpro.displayName;
+
+  console.log(command);
+
   io.emit("talk", user + "：" + ev.message.text);
   if (command.match('セッション開始')) {
     id = ev.source.groupId;
@@ -155,10 +160,6 @@ async function echoman(ev) {
       target.EDU = Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + 9;
       target.JP = target.EDU*20;
       target.know = target.EDU*5;
-    }
-    else if(redice == 'COL')
-    {
-
     }
 
     players.push(target);
