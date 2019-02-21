@@ -156,6 +156,10 @@ async function echoman(ev) {
       target.JP = target.EDU*20;
       target.know = target.EDU*5;
     }
+    else if(redice == 'COL')
+    {
+
+    }
 
     players.push(target);
 
@@ -295,6 +299,35 @@ async function echoman(ev) {
     return client.replyMessage(ev.replyToken, {
       type: "text",
       text: 'result:' + sum + '(' + resultA + ')'
+    })
+  }
+  else if (command.match('[0-9]{1,2}D100')) {
+    var index = command.indexOf('D');
+    var count = command.substring(0, index);
+    var dice = 10;
+    var result = '';
+    for (var i = 0; i < count; i++) {
+      var first = Math.floor(Math.random() * dice);
+      var second = Math.floor(Math.random() * dice);
+      if (i != 0) {
+        result += ',';
+      }
+      result += first.toString() + second.toString();
+    }
+    io.emit("talk", "Bot：" + 'result:' + result);
+    return client.replyMessage(ev.replyToken, {
+      type: "text",
+      text: 'result:' + result
+    })
+  }
+  else if (command.match('D100')) {
+    var dice = 10;
+    var first = Math.floor(Math.random() * dice);
+    var second = Math.floor(Math.random() * dice);
+    io.emit("talk", "Bot：" + 'result:' + first.toString() + second.toString());
+    return client.replyMessage(ev.replyToken, {
+      type: "text",
+      text: 'result:' + first.toString() + second.toString()
     })
   }
   else if(command.match('[0-9]{1,2}D10'))
