@@ -113,6 +113,7 @@ async function echoman(ev) {
     players.filter((value)=>{
       return value.name !== name
     })
+    console.log(target);
     console.log('redice : '+redice)
     target.retry += 1;
     if(redice == 'STR')
