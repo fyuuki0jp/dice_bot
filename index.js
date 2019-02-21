@@ -11,7 +11,7 @@ const config = {
 };
 
 const client = new line.Client(config); // 追加
-var players = [];
+
 var server = express()
   .use(express.static(path.join(__dirname, "public")))
   .set("views", path.join(__dirname, "views"))
@@ -22,6 +22,7 @@ var server = express()
   .listen(PORT, () => console.log(`Listening on ${PORT}`));
 
 const io = require('socket.io')(server);
+
 
 function getFile(req, res) {
   var path = os.tmpdir() + '/' + req.query.file;
@@ -42,7 +43,11 @@ function Bot(req, res) {
   }
   console.log("all event complete");
 }
+
 var buke_count = 0;
+var players = [];
+
+
 var id = 'U0c2b0ec852da1f79690a16c776bfa624';
 // 追加
 async function echoman(ev) {
@@ -70,6 +75,14 @@ async function echoman(ev) {
         }
       ]
     )
+  }
+  else if(command.match('コマンドヘルプ'))
+  {
+    return client.replyMessage(ev.replyToken, {
+      type: "text",
+      text: 'コマンド一覧を表示します。セッション開始\nセッションを開始し、GM向けのシークレットダイスを振ることができるWebページのURLを表示します。\nキャラ名 クトゥルフ表示\nキャラ名のステータスを表示します。\nキャラ名 クトゥルフ\nキャラのステータスを作成します。\nキャラ名 クトゥルフ振り直し ステータス項目'+
+      '\nステータス項目のダイスを振り直します。\nnDx\nn個のx面ダイスを振ります。\nDx\nx面ダイスを振ります。\nスタート\n「銀剣のステラナイツ」のブーケカウントを開始します。\nストップ\n「銀剣のステラナイツ」のブーケカウントを終了し、ブーケの数を表示します。\nブーケ\n「銀剣のステラナイツ」のブーケカウントを＋１します。'
+    })
   }
   else if(command.match('クトゥルフ表示'))
   {
