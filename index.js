@@ -315,7 +315,7 @@ async function echoman(ev) {
   else if (command.match('[0-9]{1,2}D3')) {
     var index = command.indexOf('D');
     var count = command.substring(0, index);
-    var dice = 6;
+    var dice = 3;
     var sum = 0;
     var i = 0;
     var resultA = '';
@@ -337,7 +337,7 @@ async function echoman(ev) {
   }
   else if(command.match('D3'))
   {
-    var dice = 6;
+    var dice = 3;
     var ret = Math.floor(Math.random() * dice) + 1;
     io.emit("talk", "Bot：" + 'result:' + ret)
     return client.replyMessage(ev.replyToken, {
