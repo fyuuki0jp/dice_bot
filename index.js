@@ -302,6 +302,49 @@ async function echoman(ev) {
       text: 'result:' + sum + '(' + resultA + ')'
     })
   }
+  else if(command.match('D6'))
+  {
+    var dice = 6;
+    var ret = Math.floor(Math.random() * dice) + 1;
+    io.emit("talk", "Bot：" + 'result:' + ret)
+    return client.replyMessage(ev.replyToken, {
+      type: "text",
+      text: 'result:' + ret
+    })
+  }
+  else if (command.match('[0-9]{1,2}D3')) {
+    var index = command.indexOf('D');
+    var count = command.substring(0, index);
+    var dice = 6;
+    var sum = 0;
+    var i = 0;
+    var resultA = '';
+    var tmp = 0;
+    console.log('command : ' + command + ' count : ' + count + ' dice : ' + dice);
+    for (i = 0; i < count; i++) {
+      tmp = Math.floor(Math.random() * dice) + 1;
+      if (i != 0) {
+        resultA += ',';
+      }
+      resultA += tmp.toString();
+      sum += tmp;
+    }
+    io.emit("talk", "Bot：" + 'result:' + sum + '(' + resultA + ')')
+    return client.replyMessage(ev.replyToken, {
+      type: "text",
+      text: 'result:' + sum + '(' + resultA + ')'
+    })
+  }
+  else if(command.match('D3'))
+  {
+    var dice = 6;
+    var ret = Math.floor(Math.random() * dice) + 1;
+    io.emit("talk", "Bot：" + 'result:' + ret)
+    return client.replyMessage(ev.replyToken, {
+      type: "text",
+      text: 'result:' + ret
+    })
+  }
   else if (command.match('[0-9]{1,2}D100')) {
     var index = command.indexOf('D');
     var count = command.substring(0, index);
