@@ -173,13 +173,7 @@ async function echoman(ev) {
   }
   else if(command.match('クトゥルフ'))
   {
-    var db = STR+SIZ;
-    var D = '-';
-    if(db <= 12)D='-1D6';
-    else if(db <= 16)D='-1D4';
-    else if(db <= 24)D='0';
-    else if(db <= 32)D='+1D4';
-    else if(db <= 36)D='+1D6';
+    
     var STR = Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + 3;
     var CON = Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + 3;
     var POW = Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + 3;
@@ -191,6 +185,13 @@ async function echoman(ev) {
 
     var name = '';
 
+    var db = STR+SIZ;
+    var D = '-';
+    if(db <= 12)D='-1D6';
+    else if(db <= 16)D='-1D4';
+    else if(db <= 24)D='0';
+    else if(db <= 32)D='+1D4';
+    else if(db <= 36)D='+1D6';
     var index = command.indexOf('クトゥルフ')
     console.log(command);
     console.log("index : "+index);
