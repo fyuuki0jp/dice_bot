@@ -39,7 +39,7 @@ function Bot(req, res) {
   console.log("event fire");
   for (let i = 0, l = events.length; i < l; i++) {
     const ev = events[i];
-    if(ev.message.type=='text'){
+    if (ev.message.type == 'text') {
       echoman(ev)
     }
   }
@@ -81,18 +81,16 @@ async function echoman(ev) {
       ]
     )
   }
-  else if(command.match('コマンドヘルプ'))
-  {
+  else if (command.match('コマンドヘルプ')) {
     return client.replyMessage(ev.replyToken, {
       type: "text",
-      text: 'コマンド一覧を表示します。\n1:セッション開始\nセッションを開始し、GM向けのシークレットダイスを振ることができるWebページのURLを表示します。\n2:キャラ名 クトゥルフ表示\nキャラ名のステータスを表示します。\n3:キャラ名 クトゥルフ\nキャラのステータスを作成します。\n4:キャラ名 クトゥルフ振り直し ステータス項目'+
-      '\nステータス項目のダイスを振り直します。(STR,CON,POW,DEX,APP,SIZ,INT,EDU)\n5:nDx\nn個のx面ダイスを振ります。\n6:Dx\nx面ダイスを振ります。\n7:スタート\n「銀剣のステラナイツ」のブーケカウントを開始します。\n8:ストップ\n「銀剣のステラナイツ」のブーケカウントを終了し、ブーケの数を表示します。\n9:ブーケ\n「銀剣のステラナイツ」のブーケカウントを＋１します。'
+      text: 'コマンド一覧を表示します。\n1:セッション開始\nセッションを開始し、GM向けのシークレットダイスを振ることができるWebページのURLを表示します。\n2:キャラ名 クトゥルフ表示\nキャラ名のステータスを表示します。\n3:キャラ名 クトゥルフ\nキャラのステータスを作成します。\n4:キャラ名 クトゥルフ振り直し ステータス項目' +
+        '\nステータス項目のダイスを振り直します。(STR,CON,POW,DEX,APP,SIZ,INT,EDU)\n5:nDx\nn個のx面ダイスを振ります。\n6:Dx\nx面ダイスを振ります。\n7:スタート\n「銀剣のステラナイツ」のブーケカウントを開始します。\n8:ストップ\n「銀剣のステラナイツ」のブーケカウントを終了し、ブーケの数を表示します。\n9:ブーケ\n「銀剣のステラナイツ」のブーケカウントを＋１します。'
     })
   }
-  else if(command.match('クトゥルフ表示'))
-  {
+  else if (command.match('クトゥルフ表示')) {
     var index = command.indexOf('クトゥルフ')
-    name = command.substring(0,index);
+    name = command.substring(0, index);
 
     var target = players.find((player) => {
       return (player.name === name);
@@ -100,80 +98,70 @@ async function echoman(ev) {
 
     return client.replyMessage(ev.replyToken, {
       type: "text",
-      text: 'キャラシを表示します。\nプレイヤーネーム : '+target.name+'\nSTR : '+target.STR+'\nCON : '+target.CON+'\nPOW : '+target.POW+'\nDEX : '+target.DEX+'\nAPP : '+target.APP+'\nSIZ : '
-      +target.SIZ+'\nINT : '+target.INT+'\nEDU : '+target.EDU+'\n\nSAN : '+target.SAN+'\n幸運 : '+target.SAN+'\nアイデア : '+target.idea+'\n知識 : '+target.know+'\n耐久力 : '+target.HP+'\nマジックポイント : '+target.MP+'\n職業技能ポイント : '+target.JP
-      +'\n趣味技能ポイント : '+target.AP+'\nダメージボーナス : '+target.DB
+      text: 'キャラシを表示します。\nプレイヤーネーム : ' + target.name + '\nSTR : ' + target.STR + '\nCON : ' + target.CON + '\nPOW : ' + target.POW + '\nDEX : ' + target.DEX + '\nAPP : ' + target.APP + '\nSIZ : '
+        + target.SIZ + '\nINT : ' + target.INT + '\nEDU : ' + target.EDU + '\n\nSAN : ' + target.SAN + '\n幸運 : ' + target.SAN + '\nアイデア : ' + target.idea + '\n知識 : ' + target.know + '\n耐久力 : ' + target.HP + '\nマジックポイント : ' + target.MP + '\n職業技能ポイント : ' + target.JP
+        + '\n趣味技能ポイント : ' + target.AP + '\nダメージボーナス : ' + target.DB
     })
   }
-  else if(command.match('クトゥルフ振り直し'))
-  {
+  else if (command.match('クトゥルフ振り直し')) {
     var index = command.indexOf('クトゥルフ')
     var redice = command.slice(-3);
-    name = command.substring(0,index);
+    name = command.substring(0, index);
 
     var target = players.find((player) => {
       return (player.name === name);
     });
 
-    players.filter((value)=>{
+    players.filter((value) => {
       return value.name !== name
     })
     console.log(target);
-    console.log('redice : '+redice)
+    console.log('redice : ' + redice)
     target.retry += 1;
-    if(redice == 'STR')
-    {
+    if (redice == 'STR') {
       target.STR = Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + 3;
     }
-    else if(redice == 'DEX')
-    {
+    else if (redice == 'DEX') {
       target.DEX = Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + 3;
     }
-    else if(redice == 'APP')
-    {
+    else if (redice == 'APP') {
       target.APP = Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + 3;
     }
-    else if(redice == 'POW')
-    {
+    else if (redice == 'POW') {
       target.POW = Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + 3;
-      target.SAN = target.POW*5;
+      target.SAN = target.POW * 5;
       target.MP = target.POW;
     }
-    else if(redice == 'CON')
-    {
+    else if (redice == 'CON') {
       target.CON = Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + 3;
-      target.HP = Math.floor((target.CON+target.SIZ)/2+0.5)
+      target.HP = Math.floor((target.CON + target.SIZ) / 2 + 0.5)
     }
-    else if(redice == 'SIZ')
-    {
+    else if (redice == 'SIZ') {
       target.SIZ = Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + 9;
-      target.HP = Math.floor((target.CON+target.SIZ)/2+0.5)
-    }    
-    else if(redice == 'INT')
-    {
-      target.INT = Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + 9;
-      target.AP = target.INT*10;
-      target.idea = target.INT*5;
+      target.HP = Math.floor((target.CON + target.SIZ) / 2 + 0.5)
     }
-    else if(redice == 'EDU')
-    {
+    else if (redice == 'INT') {
+      target.INT = Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + 9;
+      target.AP = target.INT * 10;
+      target.idea = target.INT * 5;
+    }
+    else if (redice == 'EDU') {
       target.EDU = Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + 9;
-      target.JP = target.EDU*20;
-      target.know = target.EDU*5;
+      target.JP = target.EDU * 20;
+      target.know = target.EDU * 5;
     }
 
     players.push(target);
 
     return client.replyMessage(ev.replyToken, {
       type: "text",
-      text: 'ダイスを振り直します。'+target.retry+'回目\nプレイヤーネーム : '+target.name+'\nSTR : '+target.STR+'\nCON : '+target.CON+'\nPOW : '+target.POW+'\nDEX : '+target.DEX+'\nAPP : '+target.APP+'\nSIZ : '
-      +target.SIZ+'\nINT : '+target.INT+'\nEDU : '+target.EDU+'\n\nSAN : '+target.SAN+'\n幸運 : '+target.SAN+'\nアイデア : '+target.idea+'\n知識 : '+target.know+'\n耐久力 : '+target.HP+'\nマジックポイント : '+target.MP+'\n職業技能ポイント : '+target.JP
-      +'\n趣味技能ポイント : '+target.AP+'\nダメージボーナス : '+target.DB
+      text: 'ダイスを振り直します。' + target.retry + '回目\nプレイヤーネーム : ' + target.name + '\nSTR : ' + target.STR + '\nCON : ' + target.CON + '\nPOW : ' + target.POW + '\nDEX : ' + target.DEX + '\nAPP : ' + target.APP + '\nSIZ : '
+        + target.SIZ + '\nINT : ' + target.INT + '\nEDU : ' + target.EDU + '\n\nSAN : ' + target.SAN + '\n幸運 : ' + target.SAN + '\nアイデア : ' + target.idea + '\n知識 : ' + target.know + '\n耐久力 : ' + target.HP + '\nマジックポイント : ' + target.MP + '\n職業技能ポイント : ' + target.JP
+        + '\n趣味技能ポイント : ' + target.AP + '\nダメージボーナス : ' + target.DB
     })
   }
-  else if(command.match('クトゥルフ'))
-  {
-    
+  else if (command.match('クトゥルフ')) {
+
     var STR = Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + 3;
     var CON = Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + 3;
     var POW = Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6) + 3;
@@ -185,45 +173,45 @@ async function echoman(ev) {
 
     var name = '';
 
-    var db = STR+SIZ;
+    var db = STR + SIZ;
     var D = '-';
-    if(db <= 12)D='-1D6';
-    else if(db <= 16)D='-1D4';
-    else if(db <= 24)D='0';
-    else if(db <= 32)D='+1D4';
-    else if(db <= 36)D='+1D6';
+    if (db <= 12) D = '-1D6';
+    else if (db <= 16) D = '-1D4';
+    else if (db <= 24) D = '0';
+    else if (db <= 32) D = '+1D4';
+    else if (db <= 36) D = '+1D6';
     var index = command.indexOf('クトゥルフ')
     console.log(command);
-    console.log("index : "+index);
-    name = command.substring(0,index); 
-    console.log("name : "+name);
+    console.log("index : " + index);
+    name = command.substring(0, index);
+    console.log("name : " + name);
 
     var player = {
-      'name':name,
-      'STR':STR,
-      'CON':CON,
-      'POW':POW,
-      'DEX':DEX,
-      'APP':APP,
-      'SIZ':SIZ,
-      'INT':INT,
-      'EDU':EDU,
-      'DB':D,
-      'SAN':POW*5,
-      'idea':INT*5,
-      'know':EDU*5,
-      'HP':Math.floor((CON+SIZ)/2+0.5),
-      'MP':POW,
-      'JP':EDU*20,
-      'AP':INT*10,
-      'retry':0
+      'name': name,
+      'STR': STR,
+      'CON': CON,
+      'POW': POW,
+      'DEX': DEX,
+      'APP': APP,
+      'SIZ': SIZ,
+      'INT': INT,
+      'EDU': EDU,
+      'DB': D,
+      'SAN': POW * 5,
+      'idea': INT * 5,
+      'know': EDU * 5,
+      'HP': Math.floor((CON + SIZ) / 2 + 0.5),
+      'MP': POW,
+      'JP': EDU * 20,
+      'AP': INT * 10,
+      'retry': 0
     };
     players.push(player);
     return client.replyMessage(ev.replyToken, {
       type: "text",
-      text: 'キャラを作成します。\nプレイヤーネーム : '+player.name+'\nSTR : '+player.STR+'\nCON : '+player.CON+'\nPOW : '+player.POW+'\nDEX : '+player.DEX+'\nAPP : '+player.APP+'\nSIZ : '
-      +player.SIZ+'\nINT : '+player.INT+'\nEDU : '+player.EDU+'\n\nSAN : '+player.SAN+'\n幸運 : '+player.SAN+'\nアイデア : '+player.idea+'\n知識 : '+player.know+'\n耐久力 : '+player.HP+'\nマジックポイント : '+player.MP+'\n職業技能ポイント : '+player.JP
-      +'\n趣味技能ポイント : '+player.AP+'\nダメージボーナス : '+player.DB
+      text: 'キャラを作成します。\nプレイヤーネーム : ' + player.name + '\nSTR : ' + player.STR + '\nCON : ' + player.CON + '\nPOW : ' + player.POW + '\nDEX : ' + player.DEX + '\nAPP : ' + player.APP + '\nSIZ : '
+        + player.SIZ + '\nINT : ' + player.INT + '\nEDU : ' + player.EDU + '\n\nSAN : ' + player.SAN + '\n幸運 : ' + player.SAN + '\nアイデア : ' + player.idea + '\n知識 : ' + player.know + '\n耐久力 : ' + player.HP + '\nマジックポイント : ' + player.MP + '\n職業技能ポイント : ' + player.JP
+        + '\n趣味技能ポイント : ' + player.AP + '\nダメージボーナス : ' + player.DB
     })
   }
   else if (command.match('スタート')) {
@@ -246,16 +234,13 @@ async function echoman(ev) {
       text: `ブーケのカウントを終了します。\nブーケの個数は` + buke_count + 'でした。'
     })
   }
-  else if(command.match('[0-9]{1,2}D66'))
-  {
+  else if (command.match('[0-9]{1,2}D66')) {
     let dice = 6;
     var ret = "(";
     var index = command.indexOf('D');
     var count = command.substring(0, index);
-    for(i = 0;i<count;i++)
-    {
-      if(i != 0)
-      {
+    for (i = 0; i < count; i++) {
+      if (i != 0) {
         ret += ',';
       }
       var D60 = Math.floor(Math.random() * dice) + 1;
@@ -268,8 +253,7 @@ async function echoman(ev) {
       text: 'result:' + ret
     })
   }
-  else if(command.match('D66'))
-  {
+  else if (command.match('D66')) {
     let dice = 6;
     var D60 = Math.floor(Math.random() * dice) + 1;
     var D61 = Math.floor(Math.random() * dice) + 1;
@@ -303,8 +287,7 @@ async function echoman(ev) {
       text: 'result:' + sum + '(' + resultA + ')'
     })
   }
-  else if(command.match('D6'))
-  {
+  else if (command.match('D6')) {
     var dice = 6;
     var ret = Math.floor(Math.random() * dice) + 1;
     io.emit("talk", "Bot：" + 'result:' + ret)
@@ -336,8 +319,7 @@ async function echoman(ev) {
       text: 'result:' + sum + '(' + resultA + ')'
     })
   }
-  else if(command.match('D3'))
-  {
+  else if (command.match('D3')) {
     var dice = 3;
     var ret = Math.floor(Math.random() * dice) + 1;
     io.emit("talk", "Bot：" + 'result:' + ret)
@@ -374,29 +356,6 @@ async function echoman(ev) {
       type: "text",
       text: 'result:' + first.toString() + second.toString()
     })
-  }
-  else if(command.match('[0-9]{1,2}D10'))
-  {
-    var index = command.indexOf('D');
-    var count = command.substring(0, index);
-
-    let dice = 10;
-    var sum = 0;
-    var D10 = Math.floor(Math.random() * dice) + 1;
-    var ret = '';
-    for (i = 0; i < count; i++) {
-      tmp = Math.floor(Math.random() * dice) + 1;
-      if (i != 0) {
-        ret += ',';
-      }
-      ret += tmp.toString();
-      sum += tmp;
-    }
-    return client.replyMessage(ev.replyToken, {
-      type: "text",
-      text: 'result:' + sum + '('+ret+')'
-    })
-
   }
   else if (command.match('[0-9]{1,2}D10 c[0-9]')) {
     var index = command.indexOf('D');
@@ -443,11 +402,32 @@ async function echoman(ev) {
       text: 'result:' + sum
     })
   }
-  else if(command.match('D10'))
-  { 
+  else if (command.match('[0-9]{1,2}D10')) {
+    var index = command.indexOf('D');
+    var count = command.substring(0, index);
+
+    let dice = 10;
+    var sum = 0;
+    var D10 = Math.floor(Math.random() * dice) + 1;
+    var ret = '';
+    for (i = 0; i < count; i++) {
+      tmp = Math.floor(Math.random() * dice) + 1;
+      if (i != 0) {
+        ret += ',';
+      }
+      ret += tmp.toString();
+      sum += tmp;
+    }
+    return client.replyMessage(ev.replyToken, {
+      type: "text",
+      text: 'result:' + sum + '(' + ret + ')'
+    })
+
+  }
+  else if (command.match('D10')) {
     let dice = 10;
     var D10 = Math.floor(Math.random() * dice) + 1;
-    
+
     return client.replyMessage(ev.replyToken, {
       type: "text",
       text: 'result:' + D10.toString()
@@ -502,8 +482,7 @@ async function echoman(ev) {
       text: 'result:' + sum + '(' + result + ')'
     })
   }
-  else if(command.match('D4'))
-  {
+  else if (command.match('D4')) {
     var dice = 4;
     var d4 = Math.floor(Math.random() * dice) + 1;
     return client.replyMessage(ev.replyToken, {
@@ -531,8 +510,7 @@ async function echoman(ev) {
       text: 'result:' + sum + '(' + result + ')'
     })
   }
-  else if(command.match('D12'))
-  {
+  else if (command.match('D12')) {
     let dice = 12;
     var D12 = Math.floor(Math.random() * dice) + 1;
     return client.replyMessage(ev.replyToken, {
@@ -560,8 +538,7 @@ async function echoman(ev) {
       text: 'result:' + sum + '(' + result + ')'
     })
   }
-  else if(command.match('D8'))
-  {
+  else if (command.match('D8')) {
     let dice = 8;
     var D8 = Math.floor(Math.random() * dice) + 1;
     return client.replyMessage(ev.replyToken, {
@@ -589,8 +566,7 @@ async function echoman(ev) {
       text: 'result:' + sum + '(' + result + ')'
     })
   }
-  else if(command.match('D20'))
-  {
+  else if (command.match('D20')) {
     let dice = 8;
     var D20 = Math.floor(Math.random() * dice) + 1;
     return client.replyMessage(ev.replyToken, {
@@ -630,7 +606,7 @@ io.on("connection", (sock) => {
             originalContentUrl: "https://immense-atoll-44982.herokuapp.com/g/?file=" + uploadName,
             previewImageUrl: "https://immense-atoll-44982.herokuapp.com/g/?file=" + uploadName
           }])
-          io.emit("talk","GM：マップを公開しました。ファイル名："+uploadName);
+        io.emit("talk", "GM：マップを公開しました。ファイル名：" + uploadName);
       })
       .on('pipe', function (src) { });
 
@@ -638,11 +614,11 @@ io.on("connection", (sock) => {
     writeStream.end();
   });
 
-  sock.on("talk",(res)=>{
-    client.pushMessage(id,{
-      type:"text",
-      text:"GM->"+res
+  sock.on("talk", (res) => {
+    client.pushMessage(id, {
+      type: "text",
+      text: "GM->" + res
     });
-    io.emit("talk","GM："+res);
+    io.emit("talk", "GM：" + res);
   })
 })
